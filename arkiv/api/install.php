@@ -18,17 +18,17 @@ $database->query("CREATE TABLE IF NOT EXISTS images(
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS article_tags(
-    id int,
+    article_id int,
     tag_id int,
-    FOREIGN KEY (tag_id) REFERENCES articles(id),
-    FOREIGN KEY (id) REFERENCES tags(id)
+    FOREIGN KEY (tag_id) REFERENCES tags(id),
+    FOREIGN KEY (article_id) REFERENCES articles(id)
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS article_images(
-    id int,
+    image_id int,
     article_id int,
     FOREIGN KEY (article_id) REFERENCES articles(id),
-    FOREIGN KEY (id) REFERENCES images(id)
+    FOREIGN KEY (image_id) REFERENCES images(id)
   );");
 
 
