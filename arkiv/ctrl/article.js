@@ -25,7 +25,6 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          })
     .success(function(data) {
-      alert('success');
         if (!data.success) {
            //if not successful, bind errors to error variables
           $scope.errorTitle = data.errors.title;
@@ -35,6 +34,20 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
           $scope.errorArticle = "";
         }
       });
+  }
+
+  $scope.getArticle = function (){
+    $http.get("api/get_article_for_id.php?article_id="+$scope.article_id)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.article = response.article;
+        $scope.tags = response.tags;
+        $scope.images = response.images;
+        $scope.article_message = response.message;
+      }else {
+        $scope.article_error = response.error;
+      }
+    });
   }
 
 
@@ -50,7 +63,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="file" name="fileToUpload[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div class="form-group"><input class="form-control" type="file" name="fileToUpload[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
     });
 

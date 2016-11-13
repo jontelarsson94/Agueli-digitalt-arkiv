@@ -6,6 +6,7 @@
   $data = array();
   //Get data from DB
   $result = $database->select("articles", [
+    "id",
 	   "title"
   ]);
   //Set return statement
