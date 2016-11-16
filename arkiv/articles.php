@@ -12,7 +12,6 @@
   </head>
   <body ng-app="article" ng-controller="articleCtrl" ng-cloak ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>">
 
-
 <div class="container-fluid">
     <div class="row" ng-init="getArticles()" ng-if="article_id == -1">
       <div class="col-md-10">
@@ -66,7 +65,8 @@
       </div>
         </div>
         <div class="col-md-3">
-          <a ng-repeat="tag in tags" href="tags.php?tag_id={{tag.id}}" class="btn btn-primary tag">{{tag.name}}</a>
+          <a ng-repeat="tag in tags" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
+              'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " href="tags.php?tag_id={{tag.tag.id}}">{{tag.tag.name}}</a>
         </div>
 </div>
       </div>

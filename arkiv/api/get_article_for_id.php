@@ -18,6 +18,13 @@
   	"id" => $article_id
   ]);
 
+  $num_of_tags = $database->count('article_tags');
+  $num_of_tags2 = $database->count('tags');
+  $medium = $num_of_tags/$num_of_tags2;
+//need to do unique
+  $small = $medium*0.5;
+  $large = $medium*1.5;
+
   $tag_ids = $database->select("article_tags", [
     "tag_id"
   ], [
@@ -32,7 +39,21 @@
     ], [
       "id" => $tag_id
     ]);
-    array_push($tags, $tag);
+    $num_current = $database->count('article_tags', [
+      "tag_id" => $tag_id
+    ]);
+    if($num_current < $small){
+      array_push($tags, ["size" => 1, "tag" => $tag]);
+    }
+    elseif ($num_current >= $small && $num_current < $medium) {
+      array_push($tags, ["size" => 2, "tag" => $tag]);
+    }
+    elseif ($num_current >= $medium && $num_current < $large) {
+      array_push($tags, ["size" => 3, "tag" => $tag]);
+    }
+    else {
+      array_push($tags, ["size" => 4, "tag" => $tag]);
+    }
   }
 
   $image_ids = $database->select("article_images", [
