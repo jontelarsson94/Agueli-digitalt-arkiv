@@ -101,7 +101,7 @@
                   </div>
 	      </div>
 	      <div class="modal-footer">
-          <div class="col-md-7">
+          <div class="col-md-7 col-md-offset-1">
           <div class="row">
             <div class="col-md-12">
               <img class="col-md-3 img-responsive" ng-repeat="image in images" ng-if="$index < 4" src="img/{{image.url}}" alt="gallery-image" />
