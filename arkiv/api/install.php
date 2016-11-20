@@ -4,7 +4,10 @@ require_once '../inc/db_credentials.php';
 $database->query("CREATE TABLE IF NOT EXISTS articles(
     id int AUTO_INCREMENT PRIMARY KEY,
     title varchar(64) NOT NULL UNIQUE,
-    body text NOT NULL
+    summary text,
+    body1 text,
+    body2 text,
+    body3 text
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS tags(
@@ -27,6 +30,7 @@ $database->query("CREATE TABLE IF NOT EXISTS article_tags(
 $database->query("CREATE TABLE IF NOT EXISTS article_images(
     image_id int,
     article_id int,
+    section int,
     FOREIGN KEY (article_id) REFERENCES articles(id),
     FOREIGN KEY (image_id) REFERENCES images(id)
   );");

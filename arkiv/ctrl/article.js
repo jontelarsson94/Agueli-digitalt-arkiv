@@ -40,6 +40,9 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $http.get("api/get_article_for_id.php?article_id="+$scope.article_id)
     .success(function (response) {
       if(response.success == true){
+        $scope.image1 = response.image1;
+        $scope.image2 = response.image2;
+        $scope.image3 = response.image3;
         $scope.article = response.article;
         $scope.tags = response.tags;
         $scope.images = response.images;

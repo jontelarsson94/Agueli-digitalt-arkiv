@@ -9,13 +9,13 @@ $data = array();
 if (empty($_POST['title']))
   $errors['title'] = 'Title is required.';
 
-if (empty($_POST['body']))
-  $errors['body'] = 'Body is required.';
-//Write to db
 
 $articleId = $database->insert("articles", [
   "title" => $_POST['title'],
-  "body" => $_POST['body']
+  "summary" => $_POST['summary'],
+  "body1" => $_POST['body1'],
+  "body2" => $_POST['body2'],
+  "body3" => $_POST['body3']
 ]);
 
 if(!empty($_POST['tags']))
@@ -43,16 +43,49 @@ if(!empty($_POST['tags']))
   }
 }
 
+if(!empty($_FILES['image1']['name'])){
+  $fileId = UploadSingleFile("image1", $database);
+
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => 1
+  ]);
+}
+
+if(!empty($_FILES['image2']['name'])){
+  $fileId = UploadSingleFile('image2', $database);
+
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => 2
+  ]);
+}
+
+if(!empty($_FILES['image3']['name'])){
+  $fileId = UploadSingleFile('image3', $database);
+
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => 3
+  ]);
+}
+
+if(!empty($_FILES['fileToUpload']['name'][0])){
 $index = 0;
 foreach ($_FILES['fileToUpload']['name'] as $imp) {
   $fileId = UploadFile('fileToUpload', $database, $index);
 
   $database->insert("article_images", [
     "image_id" => $fileId,
-    "article_id" => $articleId
+    "article_id" => $articleId,
+    "section" => 0
   ]);
 
   $index = $index+1;
+}
 }
 
 //Set return statement

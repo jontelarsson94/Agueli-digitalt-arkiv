@@ -13,7 +13,10 @@
   //Get data from DB
   $article = $database->get("articles", [
   	"title",
-  	"body"
+    "summary",
+    "body1",
+  	"body2",
+    "body3"
   ], [
   	"id" => $article_id
   ]);
@@ -57,19 +60,46 @@
   }
 
   $image_ids = $database->select("article_images", [
-    "image_id"
+    "image_id",
+    "section"
   ], [
     "article_id" => $article_id
   ]);
 
   $images = array();
   foreach ($image_ids as $image_id) {
-    $image = $database->get("images", [
-      "url"
-    ], [
-      "id" => $image_id
-    ]);
-    array_push($images, $image);
+    if($image_id["section"] == 1){
+      $image1 = $database->get("images", [
+        "id",
+        "url"
+      ], [
+        "id" => $image_id["image_id"]
+      ]);
+    }
+    elseif($image_id["section"] == 2){
+      $image2 = $database->get("images", [
+        "id",
+        "url"
+      ], [
+        "id" => $image_id["image_id"]
+      ]);
+    }
+    elseif($image_id["section"] == 3){
+      $image3 = $database->get("images", [
+        "id",
+        "url"
+      ], [
+        "id" => $image_id["image_id"]
+      ]);
+    }
+    else{
+      $image = $database->get("images", [
+        "url"
+      ], [
+        "id" => $image_id["image_id"]
+      ]);
+      array_push($images, $image);
+    }
   }
 
 
@@ -83,6 +113,9 @@
     $data['article'] = $article;
     $data['tags'] = $tags;
     $data['images'] = $images;
+    $data['image1'] = $image1;
+    $data['image2'] = $image2;
+    $data['image3'] = $image3;
   }
   //Return data
   echo json_encode($data);
