@@ -37,8 +37,8 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
       });
   }
 
-  $scope.getArticle = function (){
-    $http.get("api/get_article_for_id.php?article_id="+$scope.article_id)
+  $scope.getArticle = function (id){
+    $http.get("api/get_article_for_id.php?article_id="+id)
     .success(function (response) {
       if(response.success == true){
         $scope.image1 = response.image1;
