@@ -10,16 +10,17 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
+  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="article" ng-controller="articleCtrl" ng-cloak>
-<?php require_once 'inc/navbar.php'; ?>
+    <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
     <div class="row" ng-init="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
           <div ng-repeat="article in articles" ng-if="$index % 3 == 0" class="row">
-            <div class="col-md-4"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-overlay-image"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index].title}}</h3></div></img></div></div>
-            <div class="col-md-4"><div ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 1)"><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 1].title}}</h3></div></img></div></div>
-            <div class="col-md-4"><div ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 2)"><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive img-thumbnail"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 2].title}}</h3></div></img></div></div>
+            <div class="col-md-4"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index].title}}</h3></div></img></a></div></div>
+            <div class="col-md-4"><div ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 1)"><a href=""><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 1].title}}</h3></div></img></a></div></div>
+            <div class="col-md-4"><div ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 2)"><a href=""><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 2].title}}</h3></div></img></a></div></div>
           </div>
         </div>
         <div class="col-md-2">
@@ -31,14 +32,14 @@
     </div>
 
 	<!-- Modal -->
-	<div class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div ng-if="article.title != NULL" class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
+	    <div class="modal-content ag-background-header-transparent">
 	      <div class="ag-modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h2 class="modal-title text-center" id="myModalLabel">{{article.title}}</h2>
 	      </div>
-	      <div class="top-space ag-modal-content">
+	      <div class="top-space ag-modal-content ag-background-transparent">
           <div class="container-fluid">
                 <div class="col-md-11 col-md-offset-1">
                   <div class="col-md-7">
