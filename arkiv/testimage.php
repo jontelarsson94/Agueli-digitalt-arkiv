@@ -12,6 +12,7 @@
     <script src="ctrl/article.js"></script>
   </head>
   <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()">
+    <?php require_once 'inc/navbar.php'; ?>
     <!-- Button trigger modal -->
 <button ng-repeat="test in articles" ng-click="getArticle(test.id)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Launch demo {{test.title}}
