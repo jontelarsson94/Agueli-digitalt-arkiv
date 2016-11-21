@@ -18,6 +18,17 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     });
   }
 
+  $scope.getRandomTags = function (){
+    $http.get("api/get_random_tags.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.random_tags = response.tags;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
   $scope.addArticle = function() {
     $http({
           method  : 'POST',

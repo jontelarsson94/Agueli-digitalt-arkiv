@@ -10,20 +10,22 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
-  <body ng-app="article" ng-controller="articleCtrl" ng-cloak ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>">
+  <body ng-app="article" ng-controller="articleCtrl" ng-cloak>
 
-<div class="container-fluid">
+<div class="container-fluid" ng-init="getRandomTags()">
     <div class="row" ng-init="getArticles()">
       <div class="col-md-12">
-        <div class="col-md-11">
+        <div class="col-md-10">
           <div ng-repeat="article in articles" ng-if="$index % 3 == 0" class="row">
             <button ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive center-block ag-overlay-image"><h2 class="text-center">{{articles[$index].title}}</h2></button>
             <button ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 1)"><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 1].title}}</h2></button>
             <button ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 2)"><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 2].title}}</h2></button>
           </div>
         </div>
-        <div class="col-md-1">
-          <!--here we should put tags, maybe need to change column size-->
+        <div class="col-md-2">
+          <h4>Taggar:</h4>
+          <a ng-repeat="random_tag in random_tags" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
+              'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " href="tags.php?tag_id={{random_tag.tag.id}}">{{random_tag.tag.name}}</a>
         </div>
       </div>
     </div>
