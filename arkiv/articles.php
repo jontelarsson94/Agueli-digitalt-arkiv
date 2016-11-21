@@ -17,9 +17,9 @@
       <div class="col-md-12">
         <div class="col-md-11">
           <div ng-repeat="article in articles" ng-if="$index % 3 == 0" class="row">
-            <div class="col-md-3 thumbnail"><button data-toggle="modal" data-target="#article-{{article.id}}"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive center-block ag-overlay-image"><h2 class="text-center">{{articles[$index].title}}</h2></button></div>
-            <div class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 1)"><a data-toggle="modal" data-target="#article-{{articles[$index + 1].id}}"><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 1].title}}</h2></a></div>
-            <div class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 2)"><a data-toggle="modal" data-target="#article-{{articles[$index + 2].id}}"><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 2].title}}</h2></a></div>
+            <button ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive center-block ag-overlay-image"><h2 class="text-center">{{articles[$index].title}}</h2></button>
+            <button ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 1)"><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 1].title}}</h2></button>
+            <button ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 2)"><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 2].title}}</h2></button>
           </div>
         </div>
         <div class="col-md-1">
@@ -29,7 +29,7 @@
     </div>
 
 	<!-- Modal -->
-	<div ng-repeat="article in articles" class="modal fullscreen-modal fade" id="article-{{article.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="ag-modal-header">
