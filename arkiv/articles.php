@@ -13,16 +13,22 @@
   <body ng-app="article" ng-controller="articleCtrl" ng-cloak ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>">
 
 <div class="container-fluid">
-    <div class="row" ng-init="getArticles()" ng-if="article_id == -1">
-      <div class="col-md-10">
-          <ul class="list-group">
-            <li class="list-group-item" ng-repeat="article in articles">
-              <a href="articles.php?article_id={{article.id}}">{{article.title}}</a>
-            </li>
-          </ul>
+    <div class="row" ng-init="getArticles()">
+      <div class="col-md-12">
+        <div class="col-md-11">
+          <div ng-repeat="article in articles" ng-if="$index % 3 == 0" class="row">
+            <div class="col-md-3 thumbnail"><a data-toggle="modal" data-target="#myModal"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive center-block ag-overlay-image"><h2 class="text-center">{{articles[$index].title}}</h2></a></div>
+            <div class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 1)"><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 1].title}}</h2></div>
+            <div class="col-md-3 thumbnail ag-thumbnail" ng-if="articles.length > ($index + 2)"><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive center-block"><h2 class="text-center">{{articles[$index + 2].title}}</h2></div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <!--here we should put tags, maybe need to change column size-->
+        </div>
       </div>
     </div>
     <p></p>
+
   <div class="container-fluid" ng-init="getArticle()" ng-if="article_id != -1">
         <div class="col-md-11 col-md-offset-1">
           <div class="col-md-7">
@@ -70,27 +76,24 @@
 	<div class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="ag-modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h2 class="modal-title text-center" id="myModalLabel">{{article.title}}</h2>
 	      </div>
-	      <div class="top-space">
+	      <div>
           <div class="container-fluid" ng-init="getArticle()" ng-if="article_id != -1">
                 <div class="col-md-11 col-md-offset-1">
                   <div class="col-md-7">
                     <div ng-if="image1.url != NULL">
-                      <img src="img/{{image1.url}}" alt="..." class="img-responsive center-block">
-                      <br>
+                      <img src="img/{{image1.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
                     <p>{{article.body1}}</p>
                     <div ng-if="image2.url != NULL">
-                      <img ng-if="image2.url != NULL" src="img/{{image2.url}}" alt="..." class="img-responsive center-block">
-                      <br>
+                      <img src="img/{{image2.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
                       <p>{{article.body2}}</p>
                     <div ng-if="image3.url != NULL">
-                      <img ng-if="image3.url != NULL" src="img/{{image3.url}}" alt="..." class="img-responsive center-block">
-                      <br>
+                      <img src="img/{{image3.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
                     <p>{{article.body3}}</p>
                   </div>
@@ -104,13 +107,15 @@
           <div class="col-md-7 col-md-offset-1">
           <div class="row">
             <div class="col-md-12">
-              <img class="col-md-3 img-responsive" ng-repeat="image in images" ng-if="$index < 4" src="img/{{image.url}}" alt="gallery-image" />
+              <div class="col-md-3" ng-repeat="image in images" ng-if="$index < 4">
+                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="col-md-3" ng-repeat="image in images" ng-if="$index >= 4">
-                <img class="img-responsive" src="img/{{image.url}}" alt="gallery-image"/>
+                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
               </div>
             </div>
           </div>

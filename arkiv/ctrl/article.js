@@ -10,6 +10,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     .success(function (response) {
       if(response.success == true){
         $scope.articles = response.result;
+        $scope.main_images = response.main_images;
         $scope.articles_message = response.message;
       }else {
         $scope.articles_error = response.error;

@@ -37,3 +37,24 @@ Full screen Modal
      width: 1170px;
   }
 }
+
+.ag-modal-header{
+  margin: 2em;
+}
+
+.ag-thumbnail{
+  margin-left: 1em;
+}
+
+.ag-overlay-image {
+   position: relative;
+   height: 50px;
+   width: 100%; /* for IE 6 */
+}
+
+.ag-overlay-text {
+   position: absolute;
+   top: 200px;
+   left: 0;
+   width: 100%;
+}
