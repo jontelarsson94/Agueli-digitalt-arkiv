@@ -7,12 +7,14 @@ $database->query("CREATE TABLE IF NOT EXISTS articles(
     summary text,
     body1 text,
     body2 text,
-    body3 text
+    body3 text,
+    type varchar(32) NOT NULL
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS tags(
     id int AUTO_INCREMENT PRIMARY KEY,
-    name varchar(32) NOT NULL UNIQUE
+    name varchar(32) NOT NULL UNIQUE,
+    clicks INT(64) UNSIGNED NOT NULL DEFAULT '0'
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS images(

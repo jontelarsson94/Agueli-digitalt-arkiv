@@ -129,3 +129,9 @@ a{
 p{
   color:black;
 }
+
+@media screen and (min-width: 1024px) {
+    .ag-big-div{
+        min-height: 30em;
+    }
+}

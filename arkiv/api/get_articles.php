@@ -8,6 +8,8 @@
   $articles = $database->select("articles", [
     "id",
 	   "title"
+  ], [
+    "type" => "article"
   ]);
   $main_images = array();
 

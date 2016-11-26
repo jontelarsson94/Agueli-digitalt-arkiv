@@ -65,6 +65,17 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     });
   }
 
+  $scope.addClickForTag = function (id){
+    $http.get("api/add_click.php?tag_id_click="+id)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.tags = response.success
+      }else {
+        $scope.article_error = response.error;
+      }
+    });
+  }
+
 
 });
 
