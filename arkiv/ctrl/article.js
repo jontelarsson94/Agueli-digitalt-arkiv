@@ -1,14 +1,21 @@
-angular.module('article', []).controller('articleCtrl', function($scope, $http) {
+angular.module('article', ['infinite-scroll']).controller('articleCtrl', function($scope, $http) {
   /*For post request we need to have an array with data like the variables below
   and then ng-model in html to be able to send the data with "data" in angular
   http method*/
 
   $scope.articleData = {};
+  $scope.page = 9;
+  $scope.maxArticles = 0;
+  $scope.showScrollButton = 1;
 
   $scope.getArticles = function (){
     $http.get("api/get_articles.php")
     .success(function (response) {
       if(response.success == true){
+        $scope.maxArticles = response.result.length;
+        if($scope.page >= $scope.maxArticles){
+          $scope.showScrollButton = 0;
+        }
         $scope.articles = response.result;
         $scope.main_images = response.main_images;
         $scope.articles_message = response.message;
@@ -16,6 +23,13 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
         $scope.articles_error = response.error;
       }
     });
+  }
+
+  $scope.loadMore = function (){
+    $scope.page = $scope.page+9;
+    if($scope.page >= $scope.maxArticles){
+      $scope.showScrollButton = 0;
+    }
   }
 
   $scope.getRandomTags = function (){
@@ -96,4 +110,13 @@ $(document).ready(function() {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+    $( "#add-article-form" ).submit(function( event ) {
+      if(document.getElementById("cardImage").value == "") {
+        var r = confirm("You havent choosen an image for your card, it will not look very nice.\nAre you sure you want to continue?");
+        if (r == true) {
+        } else {
+          event.preventDefault();
+        }
+     }
+    });
 });

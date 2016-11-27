@@ -14,7 +14,8 @@ $database->query("CREATE TABLE IF NOT EXISTS articles(
 $database->query("CREATE TABLE IF NOT EXISTS tags(
     id int AUTO_INCREMENT PRIMARY KEY,
     name varchar(32) NOT NULL UNIQUE,
-    clicks INT(64) UNSIGNED NOT NULL DEFAULT '0'
+    clicks INT(64) UNSIGNED NOT NULL DEFAULT 0,
+    count INT(64) NOT NULL DEFAULT 0
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS images(
@@ -33,6 +34,7 @@ $database->query("CREATE TABLE IF NOT EXISTS article_images(
     image_id int,
     article_id int,
     section int,
+    isCardImage TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (article_id) REFERENCES articles(id),
     FOREIGN KEY (image_id) REFERENCES images(id)
   );");

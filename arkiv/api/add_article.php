@@ -15,7 +15,8 @@ $articleId = $database->insert("articles", [
   "summary" => $_POST['summary'],
   "body1" => $_POST['body1'],
   "body2" => $_POST['body2'],
-  "body3" => $_POST['body3']
+  "body3" => $_POST['body3'],
+  "type" => "article"
 ]);
 
 if(!empty($_POST['tags']))
@@ -41,6 +42,17 @@ if(!empty($_POST['tags']))
        ]);
 
   }
+}
+
+if(!empty($_FILES['cardImage']['name'])){
+  $fileId = UploadSingleFile("cardImage", $database);
+
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => -1,
+    "isCardImage" => 1
+  ]);
 }
 
 if(!empty($_FILES['image1']['name'])){

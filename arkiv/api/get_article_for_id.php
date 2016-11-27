@@ -92,6 +92,7 @@
         "id" => $image_id["image_id"]
       ]);
     }
+    elseif($image_id["section"] == -1){}
     else{
       $image = $database->get("images", [
         "url"

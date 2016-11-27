@@ -17,9 +17,8 @@
   {
     $main_image_id = $database->get("article_images", [
       "image_id"
-    ], [
-      "article_id" => $article['id']
-    ]);
+    ], array('AND' => array('article_id' => $article['id'], "isCardImage" => 1))
+    );
     $main_image_url = $database->get("images", [
       "url"
     ], [

@@ -8,16 +8,17 @@
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
+    <script src="lib/js/ng-infinite-scroll.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
-  <body ng-app="article" ng-controller="articleCtrl" ng-cloak>
+  <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
-    <div class="row" ng-init="getArticles()">
+    <div class="row" infinite-scroll="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
-          <div ng-repeat="article in articles" ng-if="$index % 3 == 0" class="row">
+          <div ng-repeat="article in articles | limitTo:page" ng-if="$index % 3 == 0" class="row">
             <div class="col-md-4"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index].title}}</h3></div></img></a></div></div>
             <div class="col-md-4 ag-big-div"><div ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 1)"><a href=""><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 1].title}}</h3></div></img></a></div></div>
             <div class="col-md-4 ag-big-div"><div ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 2)"><a href=""><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 2].title}}</h3></div></img></a></div></div>
@@ -25,11 +26,13 @@
         </div>
         <div class="col-md-2">
           <h4>Taggar:</h4>
-          <a ng-repeat="random_tag in random_tags" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
+          <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
               'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id)">{{random_tag.tag.name}}</a>
         </div>
       </div>
     </div>
+  </div>
+  <div ng-if="showScrollButton == 1" class="col-md-2 col-md-offset-5"><button class="btn btn-default" ng-click="loadMore()">Load more</button></div>
 
 	<!-- Modal -->
 	<div ng-if="article.title != NULL" class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -59,8 +62,8 @@
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>
-                    <a ng-repeat="tag in tags" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
-                        'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " href="tags.php?tag_id={{tag.tag.id}}">{{tag.tag.name}}</a>
+                    <a ng-repeat="tag in tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
+                        'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " ng-click="addClickForTag(tag.tag.id)">{{tag.tag.name}}</a>
                   </div>
 	      </div>
 	      <div class="modal-footer">
@@ -84,7 +87,6 @@
 	    </div>
 	  </div>
 	</div>
-
 
   </body>
 </html>
