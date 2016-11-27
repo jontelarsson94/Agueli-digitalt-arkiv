@@ -1,9 +1,10 @@
-angular.module('article', ['infinite-scroll']).controller('articleCtrl', function($scope, $http) {
+angular.module('article', []).controller('articleCtrl', function($scope, $http) {
   /*For post request we need to have an array with data like the variables below
   and then ng-model in html to be able to send the data with "data" in angular
   http method*/
 
   $scope.articleData = {};
+  $scope.tagData = "";
   $scope.page = 9;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
@@ -25,11 +26,28 @@ angular.module('article', ['infinite-scroll']).controller('articleCtrl', functio
     });
   }
 
+  $scope.addTagToSearch = function (id){
+    $scope.tagData = $scope.tagData + "," + id;
+    alert($scope.tagData);
+  }
+
   $scope.loadMore = function (){
     $scope.page = $scope.page+9;
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }
+  }
+
+//should use a $scope.filter for if the user has pressed article, painting or letter
+  $scope.getFilteredArticles = function (){
+    $http.get("api/get_filtered_articles.php?tags="+$scope.tagData)
+    .success(function (response) {
+      if(response.success == true){
+        alert(response.echoing)
+      }else {
+        $scope.article_error = response.error;
+      }
+    });
   }
 
   $scope.getRandomTags = function (){

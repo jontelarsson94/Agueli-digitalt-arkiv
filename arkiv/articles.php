@@ -8,13 +8,15 @@
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
-    <script src="lib/js/ng-infinite-scroll.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
+  <button ng-click="addTagToSearch(1)" class="btn btn-default">Add tag</button>
+  <button ng-click="getFilteredArticles()" class="btn btn-default">Get filtered</button>
+  <p>{{effe}}</p>
     <div class="row" infinite-scroll="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
