@@ -14,9 +14,7 @@
   <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
-  <button ng-click="addTagToSearch(1)" class="btn btn-default">Add tag</button>
-  <button ng-click="getFilteredArticles()" class="btn btn-default">Get filtered</button>
-  <p>{{effe}}</p>
+  <button ng-click="addTagToSearch(1); getFilteredArticles()" class="btn btn-default">Add tag</button>
     <div class="row" infinite-scroll="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
@@ -29,7 +27,7 @@
         <div class="col-md-2">
           <h4>Taggar:</h4>
           <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
-              'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id)">{{random_tag.tag.name}}</a>
+              'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}}</a>
         </div>
       </div>
     </div>

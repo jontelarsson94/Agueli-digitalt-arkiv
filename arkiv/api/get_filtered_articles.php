@@ -5,23 +5,45 @@
 
   if (!empty($_REQUEST['tags'])) {
     $pieces = explode(",", $_REQUEST['tags']);
-  }
-  $query = " WHERE ";
-  foreach($pieces as $key => $tag){
-    if($key > 1){
-      $query .= " AND ";
-    }
-    if($key > 0){
-      $query .= "tag_id=" . $tag;
-    }
-  }
 
-  $articles = $database->query("SELECT * FROM article_tags" . $query)->fetchAll();
-  foreach($articles as $article){
-    echo $article['article_id'];
+  $query = "";
+  foreach($pieces as $key => $tag){
+    if($key == 1){
+      $query = "SELECT article_id FROM article_tags WHERE tag_id = " . $tag;
+    }
+    if($key > 1){
+      $query = "SELECT article_id from article_tags where article_id IN (" . $query . ") AND tag_id= " . $tag;
+    }
   }
-  $data['echoing'] = $articles;
-  $data['query'] = "SELECT * FROM article_tags" . $query;
+  $main_images = array();
+  $articles = array();
+
+  $article_ids = $database->query($query)->fetchAll();
+  foreach($article_ids as $article_id){
+    $article = $database->get("articles", [
+	      "id",
+	      "title"
+    ], [
+	      "id" => $article_id["article_id"]
+      ]);
+    array_push($articles, ["id" => $article['id'], "title" => $article['title']]);
+    //echo $article['title'];
+    $main_image_id = $database->get("article_images", [
+      "image_id"
+    ], array('AND' => array('article_id' => $article['id'], "isCardImage" => 1))
+    );
+    $main_image_url = $database->get("images", [
+      "url"
+    ], [
+      "id" => $main_image_id
+    ]);
+    array_push($main_images, $main_image_url);
+  }
+  $data['query'] = "SELECT title FROM article_tags" . $query;
   $data['success'] = true;
+  $data['message'] = 'Articles retrieved!';
+  $data['main_images'] = $main_images;
+  $data['result'] = $articles;
   echo json_encode($data);
+}
  ?>

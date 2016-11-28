@@ -28,7 +28,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
 
   $scope.addTagToSearch = function (id){
     $scope.tagData = $scope.tagData + "," + id;
-    alert($scope.tagData);
+    //alert($scope.tagData);
   }
 
   $scope.loadMore = function (){
@@ -43,9 +43,16 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $http.get("api/get_filtered_articles.php?tags="+$scope.tagData)
     .success(function (response) {
       if(response.success == true){
-        alert(response.echoing)
+        $scope.page = 9;
+        $scope.maxArticles = response.result.length;
+        if($scope.page >= $scope.maxArticles){
+          $scope.showScrollButton = 0;
+        }
+        $scope.articles = response.result;
+        $scope.main_images = response.main_images;
+        $scope.articles_message = response.message;
       }else {
-        $scope.article_error = response.error;
+        $scope.articles_error = response.error;
       }
     });
   }
