@@ -7,14 +7,25 @@
     $pieces = explode(",", $_REQUEST['tags']);
 
   $query = "";
-  foreach($pieces as $key => $tag){
+  $tags = array();
+  foreach($pieces as $key => $value){
     if($key == 1){
-      $query = "SELECT article_id FROM article_tags WHERE tag_id = " . $tag;
+      $query = "SELECT article_id FROM article_tags WHERE tag_id = " . $value;
     }
     if($key > 1){
-      $query = "SELECT article_id from article_tags where article_id IN (" . $query . ") AND tag_id= " . $tag;
+      $query = "SELECT article_id from article_tags where article_id IN (" . $query . ") AND tag_id= " . $value;
+    }
+    if($key > 0){
+      $tag = $database->get("tags", [
+        "id",
+        "name"
+      ], [
+        "id" => $value
+      ]);
+      array_push($tags, ["id" => $tag["id"], "name" => $tag["name"]]);
     }
   }
+
   $main_images = array();
   $articles = array();
 
@@ -44,6 +55,7 @@
   $data['message'] = 'Articles retrieved!';
   $data['main_images'] = $main_images;
   $data['result'] = $articles;
+  $data['tags'] = $tags;
   echo json_encode($data);
 }
  ?>

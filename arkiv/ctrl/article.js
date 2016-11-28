@@ -4,7 +4,8 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   http method*/
 
   $scope.articleData = {};
-  $scope.tagData = "";
+  $scope.tagData = [];
+  $scope.tagDataString = ""
   $scope.page = 9;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
@@ -27,8 +28,17 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   }
 
   $scope.addTagToSearch = function (id){
-    $scope.tagData = $scope.tagData + "," + id;
+    //$scope.tagData = $scope.tagData + "," + id;
+    $scope.tagData.push(id);
     //alert($scope.tagData);
+  }
+
+  $scope.removeTagToSearch = function (id){
+    for(var i=0;i<$scope.tagData.length;i++) {
+      if($scope.tagData[i] == id){
+        $scope.items.splice(i, 1);
+      }
+    }
   }
 
   $scope.loadMore = function (){
@@ -40,7 +50,11 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
 
 //should use a $scope.filter for if the user has pressed article, painting or letter
   $scope.getFilteredArticles = function (){
-    $http.get("api/get_filtered_articles.php?tags="+$scope.tagData)
+    $scope.tagString = ""
+    for(var i=0;i<$scope.tagData.length;i++) {
+      $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
+    }
+    $http.get("api/get_filtered_articles.php?tags="+$scope.tagString)
     .success(function (response) {
       if(response.success == true){
         $scope.page = 9;
@@ -48,6 +62,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
         }
+        $scope.filterTags = response.tags;
         $scope.articles = response.result;
         $scope.main_images = response.main_images;
         $scope.articles_message = response.message;

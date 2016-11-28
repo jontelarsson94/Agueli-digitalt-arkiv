@@ -14,7 +14,9 @@
   <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
-  <button ng-click="addTagToSearch(1); getFilteredArticles()" class="btn btn-default">Add tag</button>
+  <div class="col-md-4 col-md-offset-4">
+    <button class="btn btn-primary ag-btn-margin" ng-repeat="filterTag in filterTags">{{filterTag.name}}</button>
+  </div>
     <div class="row" infinite-scroll="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">

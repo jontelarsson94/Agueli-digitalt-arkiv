@@ -135,3 +135,7 @@ p{
         min-height: 27em;
     }
 }
+
+.ag-btn-margin{
+  padding: 1em;
+}
