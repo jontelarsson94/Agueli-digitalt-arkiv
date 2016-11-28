@@ -15,7 +15,9 @@
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getRandomTags()">
   <div class="col-md-4 col-md-offset-4">
-    <button class="btn btn-primary ag-btn-margin" ng-repeat="filterTag in filterTags">{{filterTag.name}}</button>
+    <div>
+        <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill btn btn-danger">{{filterTag.name}} <span class="glyphicon glyphicon-remove"></span></button>
+    </div>
   </div>
     <div class="row" infinite-scroll="getArticles()">
       <div class="col-md-12">

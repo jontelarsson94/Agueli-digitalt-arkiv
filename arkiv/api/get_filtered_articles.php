@@ -58,4 +58,7 @@
   $data['tags'] = $tags;
   echo json_encode($data);
 }
+else{
+  require_once "get_articles.php";
+}
  ?>

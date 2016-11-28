@@ -36,7 +36,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.removeTagToSearch = function (id){
     for(var i=0;i<$scope.tagData.length;i++) {
       if($scope.tagData[i] == id){
-        $scope.items.splice(i, 1);
+        $scope.tagData.splice(i, 1);
       }
     }
   }
