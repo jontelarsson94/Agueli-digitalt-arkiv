@@ -57,6 +57,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $http.get("api/get_filtered_articles.php?tags="+$scope.tagString)
     .success(function (response) {
       if(response.success == true){
+        $scope.showScrollButton = 1;
         $scope.page = 9;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){

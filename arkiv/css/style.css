@@ -62,26 +62,9 @@ Full screen Modal
   background-color: rgba(211, 211, 211, 1);
 }
 
-.transparent{
-  position: absolute;
-  left: 1.05em;
-  bottom: 1em;
-  right: 1.06em;
-  background-color:rgba(255,255,255,0.5);
-}
-
-.ag-img-thumbnail{
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-.ag-overlay-image{
-  position: relative;
-}
-
 .ag-overlay-text{
   position: relative;
-  bottom: 0.2em;
+  bottom: 0.1em;
   left: 0.8em;
 }
 
@@ -130,12 +113,41 @@ p{
   color:black;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 800px) {
     .ag-big-div{
-        min-height: 27em;
+        height: 27em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    h4{
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    h4{
+        font-size: 1em;
     }
 }
 
 .ag-btn-margin{
   padding: 1em;
+}
+
+.ag-img-thumbnail{
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.ag-overlay-image{
+  position: relative;
+}
+
+.transparent{
+  position: absolute;
+  left: 1.14em;
+  bottom: 1em;
+  right: 1.14em;
+  background-color:rgba(255,255,255,0.5);
 }

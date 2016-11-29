@@ -19,14 +19,10 @@
         <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill btn btn-danger">{{filterTag.name}} <span class="glyphicon glyphicon-remove"></span></button>
     </div>
   </div>
-    <div class="row" infinite-scroll="getArticles()">
+    <div class="row-fluid" infinite-scroll="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
-          <div ng-repeat="article in articles | limitTo:page" ng-if="$index % 3 == 0" class="row">
-            <div class="col-md-4"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index].title}}</h3></div></img></a></div></div>
-            <div class="col-md-4 ag-big-div"><div ng-click="getArticle(articles[$index + 1].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 1)"><a href=""><img src="img/{{main_images[$index + 1].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 1].title}}</h3></div></img></a></div></div>
-            <div class="col-md-4 ag-big-div"><div ng-click="getArticle(articles[$index + 2].id)" data-toggle="modal" data-target="#myModal" ng-if="articles.length > ($index + 2)"><a href=""><img src="img/{{main_images[$index + 2].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h3 class="ag-overlay-text">{{articles[$index + 2].title}}</h3></div></img></a></div></div>
-          </div>
+            <div ng-repeat="article in articles | limitTo:page" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
         </div>
         <div class="col-md-2">
           <h4>Taggar:</h4>
@@ -36,6 +32,7 @@
       </div>
     </div>
   </div>
+  <br>
   <div ng-if="showScrollButton == 1" class="col-md-2 col-md-offset-5"><button class="btn btn-default" ng-click="loadMore()">Load more</button></div>
 
 	<!-- Modal -->
