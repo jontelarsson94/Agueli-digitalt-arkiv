@@ -8,7 +8,8 @@ $database->query("CREATE TABLE IF NOT EXISTS articles(
     body1 text,
     body2 text,
     body3 text,
-    type varchar(32) NOT NULL
+    type varchar(32) NOT NULL,
+    star TINYINT(1) NOT NULL DEFAULT 0
   );");
 
 $database->query("CREATE TABLE IF NOT EXISTS tags(

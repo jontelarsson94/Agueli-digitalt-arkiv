@@ -4,6 +4,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   http method*/
 
   $scope.articleData = {};
+  $scope.lastReadId = 0;
   $scope.tagData = [];
   $scope.tagDataString = ""
   $scope.page = 9;
@@ -46,6 +47,10 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }
+  }
+
+  $scope.lastRead = function (id){
+    $scope.lastReadId = id;
   }
 
 //should use a $scope.filter for if the user has pressed article, painting or letter

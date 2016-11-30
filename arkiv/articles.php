@@ -18,13 +18,15 @@
     <div>
         <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill btn btn-danger">{{filterTag.name}} <span class="glyphicon glyphicon-remove"></span></button>
     </div>
+    <br>
   </div>
-    <div class="row-fluid" infinite-scroll="getArticles()">
+    <div class="row-fluid" ng-init="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
             <div ng-repeat="article in articles | limitTo:page" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
         </div>
         <div class="col-md-2">
+          <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Go back to last read</button>
           <h4>Taggar:</h4>
           <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
               'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}}</a>
@@ -63,8 +65,8 @@
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>
-                    <a ng-repeat="tag in tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
-                        'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " ng-click="addClickForTag(tag.tag.id)">{{tag.tag.name}}</a>
+                    <a ng-repeat="tag in tags | orderBy : 'tag.name'" data-dismiss="modal" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
+                        'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " ng-click="lastRead(article.id); addClickForTag(tag.tag.id); addTagToSearch(tag.tag.id); getFilteredArticles()">{{tag.tag.name}}</a>
                   </div>
 	      </div>
 	      <div class="modal-footer">
