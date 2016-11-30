@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="lib/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/article.js"></script>
@@ -57,15 +58,15 @@
                     <div ng-if="image1.url != NULL">
                       <img src="img/{{image1.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
-                    <p>{{article.body1}}</p>
+                    <p compile="article.body1"></p>
                     <div ng-if="image2.url != NULL">
                       <img src="img/{{image2.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
-                      <p>{{article.body2}}</p>
+                      <p compile="article.body2"></p>
                     <div ng-if="image3.url != NULL">
                       <img src="img/{{image3.url}}" alt="..." class="img-responsive center-block thumbnail">
                     </div>
-                    <p>{{article.body3}}</p>
+                    <p compile="article.body3"></p>
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>

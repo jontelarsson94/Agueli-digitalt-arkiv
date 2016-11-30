@@ -10,7 +10,7 @@ $text = "Hej jag gillar att resa. Speciellt till Tyskland och Frankrike.";
 
 foreach($datas as $data)
 {
-  $text = str_replace($data['name'], '<a href="tags/' . $data['id'] . '">' . $data['name'] . '</a>', $text);
+  $text = str_replace($data['name'], '<a href="" ng-click="addTagToSearchFromText(' . $data['id'] . '); getFilteredArticles();" data-dismiss="modal"> ' . $data['name'] . '</a>', $text);
 }
 
 echo $text;

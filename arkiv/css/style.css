@@ -158,3 +158,9 @@ p{
   right: 1.14em;
   background-color:rgba(255,255,255,0.5);
 }
+
+.fake-link {
+    color:#000080;
+    text-decoration: underline;
+    cursor: pointer;
+}

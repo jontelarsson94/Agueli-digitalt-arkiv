@@ -40,6 +40,11 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     //alert($scope.tagData);
   }
 
+  $scope.addTagToSearchFromText = function (id){
+    $scope.tagData = []
+    $scope.tagData.push(id);
+  }
+
   $scope.removeTagToSearch = function (id){
     for(var i=0;i<$scope.tagData.length;i++) {
       if($scope.tagData[i] == id){
@@ -162,6 +167,28 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
 
 
 });
+
+angular.module('article').directive('compile', ['$compile', function ($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                // watch the 'compile' expression for changes
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                // when the 'compile' expression changes
+                // assign it into the current DOM
+                element.html(value);
+
+                // compile the new DOM and link it to the current
+                // scope.
+                // NOTE: we only compile .childNodes so that
+                // we don't get into infinite loop compiling ourselves
+                $compile(element.contents())(scope);
+            }
+        );
+    };
+}]);
 
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed

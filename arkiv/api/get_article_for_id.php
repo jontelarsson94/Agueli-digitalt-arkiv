@@ -59,6 +59,19 @@
     }
   }
 
+  foreach($tags as $tag)
+  {
+    if($article['body1'] != NULL){
+      $article['body1'] = str_replace($tag['tag']['name'], '<span class="fake-link" data-ng-click="addTagToSearchFromText(' . $tag['tag']['id'] . '); getFilteredArticles()" data-dismiss="modal">' . $tag['tag']['name'] . '</span>', $article['body1']);
+    }
+    if($article['body2'] != NULL){
+      $article['body2'] = str_replace($tag['tag']['name'], '<span class="fake-link" data-ng-click="addTagToSearchFromText(' . $tag['tag']['id'] . '); getFilteredArticles()" data-dismiss="modal">' . $tag['tag']['name'] . '</span>', $article['body2']);
+    }
+    if($article['body3'] != NULL){
+      $article['body3'] = str_replace($tag['tag']['name'], '<span class="fake-link" data-ng-click="addTagToSearchFromText(' . $tag['tag']['id'] . '); getFilteredArticles()" data-dismiss="modal">' . $tag['tag']['name'] . '</span>', $article['body3']);
+    }
+  }
+
   $image_ids = $database->select("article_images", [
     "image_id",
     "section"
@@ -102,8 +115,6 @@
       array_push($images, $image);
     }
   }
-
-
   //Set return statement
   if (!empty($errors)) {
     $data['success'] = false;
