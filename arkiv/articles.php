@@ -23,10 +23,14 @@
     <div class="row-fluid" ng-init="getArticles()">
       <div class="col-md-12">
         <div class="col-md-10">
-            <div ng-repeat="article in articles | limitTo:page" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles[$index].id)" data-toggle="modal" data-target="#myModal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
+          <div ng-repeat="article in articles | limitTo:page">
+            <div ng-if="articles_lastRead[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_lastRead[$index].id); lastRead(articles_lastRead[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_lastRead[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles_lastRead[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
+            <div ng-if="articles_starred[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_starred[$index].id); lastRead(articles_starred[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_starred[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles_starred[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span></img></a></div></div>
+            <div class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
+          </div>
         </div>
         <div class="col-md-2">
-          <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Go back to last read</button>
+          <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Go back to last read</button>
           <h4>Taggar:</h4>
           <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
               'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}}</a>
@@ -38,7 +42,7 @@
   <div ng-if="showScrollButton == 1" class="col-md-2 col-md-offset-5"><button class="btn btn-default" ng-click="loadMore()">Load more</button></div>
 
 	<!-- Modal -->
-	<div ng-if="article.title != NULL" class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fullscreen-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content ag-background-header-transparent">
 	      <div class="ag-modal-header">

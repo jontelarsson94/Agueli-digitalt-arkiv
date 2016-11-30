@@ -55,7 +55,10 @@
   $data['message'] = 'Articles retrieved!';
   $data['main_images'] = $main_images;
   $data['result'] = $articles;
+  $data['result_starred'] = "";
+  $data['result_lastRead'] = "";
   $data['tags'] = $tags;
+  $data['page'] = 9;
   echo json_encode($data);
 }
 else{

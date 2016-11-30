@@ -144,6 +144,13 @@ p{
   position: relative;
 }
 
+.ag-glyph-overlay{
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  font-size: 2em;
+}
+
 .transparent{
   position: absolute;
   left: 1.14em;

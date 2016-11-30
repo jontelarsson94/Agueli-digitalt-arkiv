@@ -7,20 +7,26 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.lastReadId = 0;
   $scope.tagData = [];
   $scope.tagDataString = ""
-  $scope.page = 9;
+  $scope.page = 4;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
 
   $scope.getArticles = function (){
+    $scope.isSelection = 0;
     $http.get("api/get_articles.php")
     .success(function (response) {
       if(response.success == true){
+        $scope.page = 4;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
         }
         $scope.articles = response.result;
         $scope.main_images = response.main_images;
+        $scope.articles_starred = response.result_starred;
+        $scope.main_images_starred = response.main_images_starred;
+        $scope.articles_lastRead = response.result_lastRead;
+        $scope.main_images_lastRead = response.main_images_lastRead;
         $scope.articles_message = response.message;
       }else {
         $scope.articles_error = response.error;
@@ -43,7 +49,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   }
 
   $scope.loadMore = function (){
-    $scope.page = $scope.page+9;
+    $scope.page = $scope.page+5;
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }
@@ -53,28 +59,46 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $scope.lastReadId = id;
   }
 
-//should use a $scope.filter for if the user has pressed article, painting or letter
-  $scope.getFilteredArticles = function (){
-    $scope.tagString = ""
-    for(var i=0;i<$scope.tagData.length;i++) {
-      $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
-    }
-    $http.get("api/get_filtered_articles.php?tags="+$scope.tagString)
+  $scope.lastRead = function (id){
+    $scope.lastReadId = id;
+    $http.get("api/set_last_read.php?lastRead="+$scope.lastReadId)
     .success(function (response) {
       if(response.success == true){
-        $scope.showScrollButton = 1;
-        $scope.page = 9;
-        $scope.maxArticles = response.result.length;
-        if($scope.page >= $scope.maxArticles){
-          $scope.showScrollButton = 0;
-        }
-        $scope.filterTags = response.tags;
-        $scope.articles = response.result;
-        $scope.main_images = response.main_images;
-        $scope.articles_message = response.message;
+        //alert('success');
       }else {
-        $scope.articles_error = response.error;
+        //alert('error');
       }
+    });
+  }
+
+//should use a $scope.filter for if the user has pressed article, painting or letter
+  $scope.getFilteredArticles = function (){
+      $scope.tagString = ""
+      for(var i=0;i<$scope.tagData.length;i++) {
+        $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
+      }
+      $http.get("api/get_filtered_articles.php?tags="+$scope.tagString)
+      .success(function (response) {
+        if(response.success == true){
+          $scope.maxArticles = response.result.length;
+          $scope.page = response.page;
+          if($scope.page >= $scope.maxArticles){
+            $scope.showScrollButton = 0;
+          }
+          else{
+            $scope.showScrollButton = 1;
+          }
+          $scope.filterTags = response.tags;
+          $scope.articles = response.result;
+          $scope.main_images = response.main_images;
+          $scope.articles_starred = response.result_starred;
+          $scope.main_images_starred = response.main_images_starred;
+          $scope.articles_lastRead = response.result_lastRead;
+          $scope.main_images_lastRead = response.main_images_lastRead;
+          $scope.articles_message = response.message;
+        }else {
+          $scope.articles_error = response.error;
+        }
     });
   }
 
