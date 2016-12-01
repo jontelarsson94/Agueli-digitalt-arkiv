@@ -1,13 +1,13 @@
 <?php
-//require_once '../lib/php/medoo.php';
+require_once '../lib/php/medoo.php';
 
-$testConnection = mysql_connect('10.209.1.170', '105649_lz33499', 'phujebachi');
+/*$testConnection = mysql_connect('10.209.1.170', '105649_lz33499', 'phujebachi');
 if (!$testConnection) {
 die('Error: ' . mysql_error());
 }
 echo 'Database connection working!';
 mysql_close($testConnection);
-
+*/
 
 /*$database = new medoo([
     'database_type' => 'mysql',
@@ -31,12 +31,12 @@ mysql_close($testConnection);
       'port' => 3306
   ]);
 */
-/*$database = new medoo([
+$database = new medoo([
     'database_type' => 'mysql',
     'database_name' => 'agueli_arkiv',
     'server' => 'localhost',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8'
-]);*/
+]);
 ?>

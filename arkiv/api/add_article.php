@@ -24,7 +24,8 @@ if(!empty($_POST['tags']))
   $tags = explode(", ", $_POST['tags']);
   foreach ($tags as $tag) {
     $tagId = $database->get('tags', [
-      'id'
+      'id',
+      'count'
     ],[
       'name' => $tag
     ]);
@@ -33,6 +34,12 @@ if(!empty($_POST['tags']))
     if($tag_id == NULL){
        $tag_id = $database->insert("tags", [
         'name' => $tag
+      ]);
+    }else{
+      $database->update("tags", [
+        'count' => $tagId['count']+1
+      ], [
+        'id' => $tag_id
       ]);
     }
     //echo $tag_id;
