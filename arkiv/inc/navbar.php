@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><h3 class="ag-h3"><span class="glyphicon glyphicon-link"></span>Agueli Arkiv</h3></a>
+      <a class="navbar-brand" href="#"><h3 class="ag-h3"><span class="glyphicon"></span>Agueli Arkiv</h3></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
