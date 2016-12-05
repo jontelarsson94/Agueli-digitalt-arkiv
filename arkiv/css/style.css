@@ -117,6 +117,9 @@ p{
     .ag-big-div{
         height: 27em;
     }
+    .ag-half-div{
+      height: 14em;
+    }
 }
 
 @media screen and (max-width: 800px) {
