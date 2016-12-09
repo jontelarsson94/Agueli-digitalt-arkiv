@@ -14,18 +14,12 @@
     ]
   ]);
 
-  echo $database->last_query();
+  //echo $database->last_query();
   /*if($success == 0){
     errors["error"] = "No tags found in this category";
   }*/
   //Set return statement
-  if (!empty($errors)) {
-    $data['success'] = false;
-    $data['errors']  = $errors;
-  } else {
-    $data['success'] = true;
-    //$data['result'] = $tags;
-  }
+  $data['success'] = true;
   //Return data
   echo json_encode($data);
 ?>

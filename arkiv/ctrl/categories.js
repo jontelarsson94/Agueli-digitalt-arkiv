@@ -3,6 +3,8 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
   and then ng-model in html to be able to send the data with "data" in angular
   http method*/
 
+  $scope.tagData = {};
+
   $scope.getCategories = function (){
     $http.get("api/get_categories.php")
     .success(function (response) {
@@ -15,9 +17,9 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
   }
 
   $scope.getTagsForCategory = function (id){
-    $http.get("api/get_tags_for_categoriy.php?category_id=" + id)
+    $http.get("api/get_tags_for_category.php?category_id=" + id)
     .success(function (response) {
-      if(response.success == true){      
+      if(response.success == true){   
         $scope.category_tags = response.result;
       }else {
         $scope.categories_error = response.error;
@@ -33,11 +35,31 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
     }).success(function (response) {
       if(response.success == true){
         $scope.getTagsForCategory($scope.cId); // för att visa nytt resultat efter borttagning av en tag
-
       }else {
         $scope.tag_error = response.errors.exists;
       }
     });
+  }
+
+  $scope.addTagForCategory = function() {
+
+    $http({
+          method  : 'POST',
+          url     : 'api/add_tag_for_category.php?category=' + $scope.category_id,
+          data    : $.param($scope.tagData),
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+         })
+    .success(function(data) {
+        if (!data.success) {
+          // if not successful, bind errors to error variables
+          $scope.errorTag = data.errors;
+        } else {
+          alert(data.category);
+          $scope.formMessageAddress = data.message;
+          //$scope.tagData.tag = "";
+          $scope.getTagsForCategory($scope.category_id);
+        }
+      });
   }
 
 });

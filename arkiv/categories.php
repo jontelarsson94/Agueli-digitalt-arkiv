@@ -25,6 +25,13 @@
       <ul ng-if="category_id != -1" ng-init="getTagsForCategory(category_id)" class="list-group">
         <li ng-repeat="tag in category_tags" class="list-group-item col-md-2"><a>{{tag.name}}</a><span ng-click="removeTagForCategory(tag.id, category_id)" class="glyphicon glyphicon-remove pull-right fake-button"></span></li>
       </ul>
+      <br><br>
+      <div class="row">
+        <form class="col-md-4 col-md-offset-4" role="form" ng-submit="addTagForCategory();" class="form-inline">
+          <input type="text" class="form-control" placeholder="Tag name" name="tag" id="tag" ng-model="tagData.tag">
+          <button type="submit" class="btn btn-default">Add tag</button>
+        </form>
+      </div>
 
     </div>
   </body>
