@@ -174,3 +174,7 @@ this is the cc for cropping and rezising to middle
     text-decoration: underline;
     cursor: pointer;
 }
+
+.fake-button{
+  cursor: pointer;
+}
