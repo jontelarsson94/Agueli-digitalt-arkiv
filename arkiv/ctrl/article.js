@@ -232,5 +232,9 @@ $(document).ready(function() {
           event.preventDefault();
         }
      }
+     if(document.getElementById("title").value == ""){
+        event.preventDefault();
+        alert("You need to input a title!");
+     }
     });
 });

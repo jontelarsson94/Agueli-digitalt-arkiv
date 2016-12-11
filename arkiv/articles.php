@@ -61,6 +61,9 @@
                       </div>
                       <p compile="body.body"></p>
                     </div>
+                    <div ng-if="bodies.length < body_images.length" ng-repeat="image in body_images">
+                        <img ng-if="$index >= bodies.length" src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
+                    </div>
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>

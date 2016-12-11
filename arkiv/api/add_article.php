@@ -9,11 +9,16 @@ $data = array();
 if (empty($_POST['title']))
   $errors['title'] = 'Title is required.';
 
+$favorite = 0;
+if(!empty($_POST['favorite'])){
+  $favorite = $_POST['favorite'];
+}
 
 $articleId = $database->insert("articles", [
   "title" => $_POST['title'],
   "summary" => $_POST['summary'],
-  "type" => "article"
+  "type" => "article",
+  "star" => $favorite
 ]);
 
 if(!empty($_POST['tags']))
@@ -72,6 +77,7 @@ foreach ($_FILES['image']['name'] as $imp) {
 
   $index = $index+1;
 }
+$data['num_images'] = $index;
 }
 
 if(!empty($_FILES['fileToUpload']['name'][0])){

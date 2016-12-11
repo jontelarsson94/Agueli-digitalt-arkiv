@@ -28,22 +28,29 @@
                   <div class="form-group">
                     <label for="image1">Choose your image to show on the card (VERY RECOMMENDED)</label>
                     <input class="form-control" type="file" name="cardImage" id="cardImage"></div>
-                  <div class="form-group">
-                    <label for="image1">Optional image before section 1</label>
-                    <input class="form-control" type="file" name="image1"></div>
+                  <div class="body_fields_wrap">
+                    <div class="form-group">
+                    <label for="image[]">Optional image before section 1</label>
+                    <input class="form-control" type="file" name="image[]"></div>
                   <div class="form-group">
                     <label for="body[]">Optional text (section 1)</label>
                     <textarea class="form-control" rows="10" cols="25" name="body[]"></textarea>
                   </div>
-                  <div class="body_fields_wrap">
-                    <button class="add_body_button">Add more sections of image and text</button>
                   </div>
-                  <br>
+                  <button class="add_body_button">Add more sections of image and text</button>
                   <div class="input_fields_wrap">
-                    <button class="add_field_button">Add more fields for gallery images</button>
+                  <br><br>
                     <div class="form-group"><input class="form-control" type="file" name="fileToUpload[]"></div>
                   </div>
+                  <button class="add_field_button">Add more fields for gallery images</button>
                   <div class="form-group">
+                    <br><br>
+                    <label>Add as favorite:</label>
+                    <label class="radio-inline"><input type="radio" name="favorite" value="1">Yes</label>
+                    <label class="radio-inline"><input type="radio" name="favorite" value="0" checked="checked">No</label>
+                  </div>
+                  <div class="form-group">
+                  <br>
                     <label for="tags">Tags</label>
                     <input class="form-control" type="text" name="tags">
                   </div>
