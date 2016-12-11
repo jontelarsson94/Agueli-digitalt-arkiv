@@ -207,6 +207,24 @@ $(document).ready(function() {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+
+    var max_fields_body      = 10; //maximum input boxes allowed
+    var wrapper_body         = $(".body_fields_wrap"); //Fields wrapper
+    var add_button_body      = $(".add_body_button"); //Add button ID
+
+    var x_body = 1; //initlal text box count
+    $(add_button_body).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x_body < max_fields_body){ //max input box allowed
+            x_body++; //text box increment
+            $(wrapper_body).append('<div class="form-group"><label for="image[]">Optional image before section ' + x_body + '</label><input class="form-control" type="file" name="image[]"><br><label for="body[]">Optional text (section ' + x_body + ')</label><textarea class="form-control" rows="10" cols="25" name="body[]"></textarea><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+
+    $(wrapper_body).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x_body--;
+    })
+
     $( "#add-article-form" ).submit(function( event ) {
       if(document.getElementById("cardImage").value == "") {
         var r = confirm("You havent choosen an image for your card, it will not look very nice.\nAre you sure you want to continue?");

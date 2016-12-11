@@ -20,6 +20,7 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
     $http.get("api/get_tags_for_category.php?category_id=" + id)
     .success(function (response) {
       if(response.success == true){   
+        $scope.category = response.category;
         $scope.category_tags = response.result;
       }else {
         $scope.categories_error = response.error;
@@ -54,9 +55,8 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
           // if not successful, bind errors to error variables
           $scope.errorTag = data.errors;
         } else {
-          alert(data.category);
           $scope.formMessageAddress = data.message;
-          //$scope.tagData.tag = "";
+          $scope.tagData.tag = "";
           $scope.getTagsForCategory($scope.category_id);
         }
       });

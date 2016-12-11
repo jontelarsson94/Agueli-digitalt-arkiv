@@ -17,16 +17,22 @@
     <div class="container-fluid">
 
     <!--The interface for all categories -->
+      <h3 ng-if="category_id == -1" class="col-md-2 col-md-offset-5">Categories</h3><div ng-if="category_id == -1" class="col-md-5"></div>
+      <div ng-if="category_id == -1" class="row col-md-12">
       <ul ng-if="category_id == -1" ng-init="getCategories()" class="list-group">
         <li ng-repeat="category in categories" class="list-group-item col-md-3"><a href="categories.php?category_id={{category.id}}">{{category.name}}</a></li>
       </ul>
+      </div>
 
     <!-- the interface for specific category -->
-      <ul ng-if="category_id != -1" ng-init="getTagsForCategory(category_id)" class="list-group">
+     <h3 ng-if="category_id != -1" ng-init="getTagsForCategory(category_id)" class="col-md-2 col-md-offset-5">{{category}}</h3><div ng-if="category_id != -1" class="col-md-5"></div>
+      <div ng-if="category_id != -1" class="row col-md-12">
+      <ul ng-if="category_id != -1" class="list-group">
         <li ng-repeat="tag in category_tags" class="list-group-item col-md-2"><a>{{tag.name}}</a><span ng-click="removeTagForCategory(tag.id, category_id)" class="glyphicon glyphicon-remove pull-right fake-button"></span></li>
       </ul>
+      </div>
+      <div class="row ag-padd-top" ng-if="category_id != -1">
       <br><br>
-      <div class="row">
         <form class="col-md-4 col-md-offset-4" role="form" ng-submit="addTagForCategory();" class="form-inline">
           <input type="text" class="form-control" placeholder="Tag name" name="tag" id="tag" ng-model="tagData.tag">
           <button type="submit" class="btn btn-default">Add tag</button>

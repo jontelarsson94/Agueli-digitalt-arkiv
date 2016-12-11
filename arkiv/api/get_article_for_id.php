@@ -13,10 +13,7 @@
   //Get data from DB
   $article = $database->get("articles", [
   	"title",
-    "summary",
-    "body1",
-  	"body2",
-    "body3"
+    "summary"
   ], [
   	"id" => $article_id
   ]);
@@ -59,7 +56,12 @@
     }
   }
 
-  foreach($tags as $tag)
+  $bodies = $database->select("article_texts", "body", [
+    // Single condition
+    "ORDER" => "section"
+    ]);
+
+  /*foreach($tags as $tag)
   {
     if($article['body1'] != NULL){
       $article['body1'] = str_replace($tag['tag']['name'], '<span class="fake-link" data-ng-click="addTagToSearchFromText(' . $tag['tag']['id'] . '); getFilteredArticles()" data-dismiss="modal">' . $tag['tag']['name'] . '</span>', $article['body1']);
@@ -70,50 +72,44 @@
     if($article['body3'] != NULL){
       $article['body3'] = str_replace($tag['tag']['name'], '<span class="fake-link" data-ng-click="addTagToSearchFromText(' . $tag['tag']['id'] . '); getFilteredArticles()" data-dismiss="modal">' . $tag['tag']['name'] . '</span>', $article['body3']);
     }
-  }
+  }*/
 
-  $image_ids = $database->select("article_images", [
-    "image_id",
-    "section"
-  ], [
-    "article_id" => $article_id
+  $image_ids = $database->select("article_images", "*", [
+    "AND" => [
+            "article_id" => $article_id,
+            "section" =>  0,
+    ]
   ]);
 
   $images = array();
   foreach ($image_ids as $image_id) {
-    if($image_id["section"] == 1){
-      $image1 = $database->get("images", [
-        "id",
+    $image = $database->get("images", [
         "url"
       ], [
-        "id" => $image_id["image_id"]
-      ]);
-    }
-    elseif($image_id["section"] == 2){
-      $image2 = $database->get("images", [
-        "id",
-        "url"
-      ], [
-        "id" => $image_id["image_id"]
-      ]);
-    }
-    elseif($image_id["section"] == 3){
-      $image3 = $database->get("images", [
-        "id",
-        "url"
-      ], [
-        "id" => $image_id["image_id"]
-      ]);
-    }
-    elseif($image_id["section"] == -1){}
-    else{
-      $image = $database->get("images", [
-        "url"
-      ], [
-        "id" => $image_id["image_id"]
+        "id" => $image_id['image_id']
       ]);
       array_push($images, $image);
-    }
+  }
+
+  $image_ids = $database->select("article_images", "*", [
+    "AND" => [
+            "article_id" => $article_id,
+            "section[>=]" =>  1,
+    ],[
+    "ORDER" => "section"
+    ]
+  ]);
+
+  $body_images = array();
+  $index = 1;
+  foreach ($image_ids as $image_id) {
+    $image = $database->get("images", [
+        "url"
+      ], [
+        "id" => $image_id['image_id']
+      ]);
+      $image['section'] = $image_id['section'];
+      array_push($body_images, $image);
   }
   //Set return statement
   if (!empty($errors)) {
@@ -123,11 +119,10 @@
     $data['success'] = true;
     $data['message'] = 'Article retrieved!';
     $data['article'] = $article;
+    $data['bodies'] = $bodies;
     $data['tags'] = $tags;
     $data['images'] = $images;
-    $data['image1'] = $image1;
-    $data['image2'] = $image2;
-    $data['image3'] = $image3;
+    $data['body_images'] = $body_images;
   }
   //Return data
   echo json_encode($data);

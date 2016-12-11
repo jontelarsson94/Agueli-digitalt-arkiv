@@ -18,12 +18,17 @@
     "id" => $database->select("category_tags", "tag_id", ["category_id" => $category_id])
   ]);
 
+  $category = $database->get("categories", "name", [
+  "id" => $category_id
+]);
+
   //Set return statement
   if (!empty($errors)) {
     $data['success'] = false;
     $data['errors']  = $errors;
   } else {
     $data['success'] = true;
+    $data['category'] = $category;
     $data['result'] = $tags;
   }
   //Return data
