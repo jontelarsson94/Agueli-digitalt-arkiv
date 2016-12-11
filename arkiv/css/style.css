@@ -181,8 +181,25 @@ this is the cc for cropping and rezising to middle
 
 .fake-button{
   cursor: pointer;
+  display: inline;
 }
 
 .ag-red{
   color: red;
+}
+
+.ag-xs{
+  font-size: 10px;
+}
+
+.ag-sm{
+  font-size: 14px;
+}
+
+.ag-md{
+  font-size: 18px;
+}
+
+.ag-lg{
+  font-size: 22px;
 }

@@ -32,12 +32,13 @@
         </div>
         <div class="col-md-2">
           <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Go back to last read</button>
-          <h4>Populära taggarna:</h4>
-          <a ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': popular_tag.size == 1 , 'btn btn-primary btn-sm tag': popular_tag.size == 2,
-              'btn btn-primary tag': popular_tag.size == 3, 'btn btn-primary btn-lg tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}}</a>
           <h4>Innehållsrikaste taggarna:</h4>
-          <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
-              'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}}</a>
+          <span ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs tag': popular_tag.size == 1 , 'fake-button ag-sm tag': popular_tag.size == 2,
+              'fake-button ag-md tag': popular_tag.size == 3, 'fake-button ag-lg tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}} </span>
+              <br><br><br><br><br><br><br>
+          <h4>Populäraste taggarna:</h4>
+          <span ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs tag': random_tag.size == 1 , 'fake-button ag-sm tag': random_tag.size == 2,
+              'fake-button ag-md tag': random_tag.size == 3, 'fake-button ag-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}} </span>
         </div>
       </div>
     </div>
@@ -70,8 +71,8 @@
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>
-                    <a ng-repeat="tag in tags | orderBy : 'tag.name'" data-dismiss="modal" ng-class="{'btn btn-primary btn-xs tag': tag.size == 1 , 'btn btn-primary btn-sm tag': tag.size == 2,
-                        'btn btn-primary tag': tag.size == 3, 'btn btn-primary btn-lg tag': tag.size == 4 } " ng-click="lastRead(article.id); addClickForTag(tag.tag.id); addTagToSearch(tag.tag.id); getFilteredArticles()">{{tag.tag.name}}</a>
+                    <span ng-repeat="tag in tags | orderBy : 'tag.name'" data-dismiss="modal" ng-class="{'fake-button ag-xs tag': tag.size == 1 , 'fake-button ag-sm tag': tag.size == 2,
+                        'fake-button ag-md tag': tag.size == 3, 'fake-button ag-lg tag': tag.size == 4 } " ng-click="lastRead(article.id); addClickForTag(tag.tag.id); addTagToSearch(tag.tag.id); getFilteredArticles()">{{tag.tag.name}} </span>
                   </div>
 	      </div>
 	      <div class="modal-footer">
