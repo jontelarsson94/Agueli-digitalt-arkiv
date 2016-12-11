@@ -7,7 +7,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.lastReadId = 0;
   $scope.tagData = [];
   $scope.tagDataString = ""
-  $scope.page = 4;
+  $scope.page = 7;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
 
@@ -16,7 +16,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $http.get("api/get_articles.php")
     .success(function (response) {
       if(response.success == true){
-        $scope.page = 4;
+        $scope.page = 7;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
@@ -54,7 +54,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   }
 
   $scope.loadMore = function (){
-    $scope.page = $scope.page+5;
+    $scope.page = $scope.page+7;
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }
@@ -107,8 +107,19 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     });
   }
 
-  $scope.getRandomTags = function (){
-    $http.get("api/get_random_tags.php")
+  $scope.getPopularTags = function (){
+    $http.get("api/get_popular_tags.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.popular_tags = response.tags;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.getClickedTags = function (){
+    $http.get("api/get_clicked_tags.php")
     .success(function (response) {
       if(response.success == true){
         $scope.random_tags = response.tags;
@@ -188,53 +199,3 @@ angular.module('article').directive('compile', ['$compile', function ($compile) 
         );
     };
 }]);
-
-$(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div class="form-group"><input class="form-control" type="file" name="fileToUpload[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-        }
-    });
-
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
-
-    var max_fields_body      = 10; //maximum input boxes allowed
-    var wrapper_body         = $(".body_fields_wrap"); //Fields wrapper
-    var add_button_body      = $(".add_body_button"); //Add button ID
-
-    var x_body = 1; //initlal text box count
-    $(add_button_body).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x_body < max_fields_body){ //max input box allowed
-            x_body++; //text box increment
-            $(wrapper_body).append('<div class="form-group"><label for="image[]">Optional image before section ' + x_body + '</label><input class="form-control" type="file" name="image[]"><br><label for="body[]">Optional text (section ' + x_body + ')</label><textarea class="form-control" rows="10" cols="25" name="body[]"></textarea><a href="#" class="remove_field">Remove</a></div>'); //add input box
-        }
-    });
-
-    $(wrapper_body).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x_body--;
-    })
-
-    $( "#add-article-form" ).submit(function( event ) {
-      if(document.getElementById("cardImage").value == "") {
-        var r = confirm("You havent choosen an image for your card, it will not look very nice.\nAre you sure you want to continue?");
-        if (r == true) {
-        } else {
-          event.preventDefault();
-        }
-     }
-     if(document.getElementById("title").value == ""){
-        event.preventDefault();
-        alert("You need to input a title!");
-     }
-    });
-});

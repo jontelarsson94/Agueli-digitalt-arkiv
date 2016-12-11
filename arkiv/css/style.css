@@ -182,3 +182,7 @@ this is the cc for cropping and rezising to middle
 .fake-button{
   cursor: pointer;
 }
+
+.ag-red{
+  color: red;
+}

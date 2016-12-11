@@ -12,9 +12,9 @@
     <script src="ctrl/article.js"></script>
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
-  <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()" ng-cloak>
+  <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles(); getPopularTags(); getClickedTags()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
-<div class="container-fluid" ng-init="getRandomTags()">
+<div class="container-fluid">
   <div class="col-md-4 col-md-offset-4">
     <div>
         <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill btn btn-danger">{{filterTag.name}} <span class="glyphicon glyphicon-remove"></span></button>
@@ -32,7 +32,10 @@
         </div>
         <div class="col-md-2">
           <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Go back to last read</button>
-          <h4>Taggar:</h4>
+          <h4>Populära taggarna:</h4>
+          <a ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': popular_tag.size == 1 , 'btn btn-primary btn-sm tag': popular_tag.size == 2,
+              'btn btn-primary tag': popular_tag.size == 3, 'btn btn-primary btn-lg tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}}</a>
+          <h4>Innehållsrikaste taggarna:</h4>
           <a ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'btn btn-primary btn-xs tag': random_tag.size == 1 , 'btn btn-primary btn-sm tag': random_tag.size == 2,
               'btn btn-primary tag': random_tag.size == 3, 'btn btn-primary btn-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}}</a>
         </div>

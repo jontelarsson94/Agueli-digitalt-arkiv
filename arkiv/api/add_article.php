@@ -21,7 +21,7 @@ $articleId = $database->insert("articles", [
   "star" => $favorite
 ]);
 
-if(!empty($_POST['tags']))
+/*if(!empty($_POST['tags']))
 {
   $tags = explode(", ", $_POST['tags']);
   foreach ($tags as $tag) {
@@ -51,7 +51,7 @@ if(!empty($_POST['tags']))
        ]);
 
   }
-}
+}*/
 
 if(!empty($_FILES['cardImage']['name'])){
   $fileId = UploadSingleFile("cardImage", $database);
@@ -108,7 +108,7 @@ if(!empty($_POST['body'][0])){
 }
 
 //Set return statement
-if (!empty($errors)) {
+/*if (!empty($errors)) {
   $data['success'] = false;
   $data['errors']  = $errors;
 } else {
@@ -118,5 +118,8 @@ if (!empty($errors)) {
 }
 //Return data
 //here we should show the article
-echo json_encode($data);
+echo json_encode($data);*/
+
+echo '<script type="text/javascript">window.location = "../add_tags_for_article.php?article_id=' . $articleId . '"</script>';
+
  ?>

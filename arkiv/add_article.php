@@ -1,4 +1,4 @@
-<html ng-app="article" ng-controller="articleCtrl">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Add article</title>
@@ -8,9 +8,9 @@
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
-    <script src="ctrl/article.js"></script>
+    <script src="ctrl/add_article.js"></script>
   </head>
-  <body ng-app="article" ng-controller="articleCtrl">
+  <body ng-app="add_article" ng-controller="add_articleCtrl">
 
 
 
@@ -48,11 +48,6 @@
                     <label>Add as favorite:</label>
                     <label class="radio-inline"><input type="radio" name="favorite" value="1">Yes</label>
                     <label class="radio-inline"><input type="radio" name="favorite" value="0" checked="checked">No</label>
-                  </div>
-                  <div class="form-group">
-                  <br>
-                    <label for="tags">Tags</label>
-                    <input class="form-control" type="text" name="tags">
                   </div>
                   <button type="submit" class="btn btn-default" name="submit">Submit</button>
             </form>
