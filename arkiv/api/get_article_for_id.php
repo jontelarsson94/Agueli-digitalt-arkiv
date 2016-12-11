@@ -56,7 +56,10 @@
     }
   }
 
-  $bodies = $database->select("article_texts", "body", [
+  $bodies = $database->select("article_texts", [
+      "body",
+      "section"
+    ],[
     // Single condition
     "ORDER" => "section"
     ]);

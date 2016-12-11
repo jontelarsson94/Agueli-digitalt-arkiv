@@ -55,18 +55,12 @@
                 <div class="col-md-11 col-md-offset-1">
                   <div class="col-md-7">
                     <br>
-                    <div ng-if="image1.url != NULL">
-                      <img src="img/{{image1.url}}" alt="..." class="img-responsive center-block thumbnail">
+                    <div ng-repeat="body in bodies">
+                      <div ng-repeat="image in body_images" ng-if="image.section == body.section">
+                        <img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
+                      </div>
+                      <p compile="body.body"></p>
                     </div>
-                    <p compile="article.body1"></p>
-                    <div ng-if="image2.url != NULL">
-                      <img src="img/{{image2.url}}" alt="..." class="img-responsive center-block thumbnail">
-                    </div>
-                      <p compile="article.body2"></p>
-                    <div ng-if="image3.url != NULL">
-                      <img src="img/{{image3.url}}" alt="..." class="img-responsive center-block thumbnail">
-                    </div>
-                    <p compile="article.body3"></p>
                   </div>
                   <div class="col-md-4 col-md-offset-1">
                     <h4>Taggar:</h4>
