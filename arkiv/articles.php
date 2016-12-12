@@ -17,7 +17,9 @@
 <div class="container-fluid">
   <div class="col-md-4 col-md-offset-4">
     <div>
-        <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill btn btn-danger">{{filterTag.name}} <span class="glyphicon glyphicon-remove"></span></button>
+        <span ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></span>
+        <span class="ag-padding"></span>
+        <span data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill glyphicon glyphicon-plus fake-button">Tagg</span>
     </div>
     <br>
   </div>
@@ -32,13 +34,13 @@
         </div>
         <div class="col-md-2">
           <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Go back to last read</button>
-          <h4>Innehållsrikaste taggarna:</h4>
-          <span ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs tag': popular_tag.size == 1 , 'fake-button ag-sm tag': popular_tag.size == 2,
-              'fake-button ag-md tag': popular_tag.size == 3, 'fake-button ag-lg tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}} </span>
+          <h4 class="ag-yellow">Innehållsrikaste taggarna:</h4>
+          <span ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': popular_tag.size == 1 , 'fake-button ag-sm ag-white tag': popular_tag.size == 2,
+              'fake-button ag-md ag-white tag': popular_tag.size == 3, 'fake-button ag-lg ag-white tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addOneTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}} </span>
               <br><br><br><br><br><br><br>
-          <h4>Populäraste taggarna:</h4>
-          <span ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs tag': random_tag.size == 1 , 'fake-button ag-sm tag': random_tag.size == 2,
-              'fake-button ag-md tag': random_tag.size == 3, 'fake-button ag-lg tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}} </span>
+          <h4 class="ag-yellow">Populäraste taggarna:</h4>
+          <span ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': random_tag.size == 1 , 'fake-button ag-sm ag-white tag': random_tag.size == 2,
+              'fake-button ag-md ag-white tag': random_tag.size == 3, 'fake-button ag-lg ag-white tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addOneTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}} </span>
         </div>
       </div>
     </div>
@@ -96,6 +98,63 @@
 	    </div>
 	  </div>
 	</div>
+  </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fullscreen-modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content ag-background-header-transparent">
+        <div class="ag-modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="modal-title text-center" id="myModalLabel">Taggar</h2>
+        </div>
+        <div class="top-space ag-modal-content ag-background-transparent">
+          <div class="container-fluid">
+                <div class="col-md-10 col-md-offset-1">
+                <br><br>
+                <div class="col-md-12 ag-border">
+                  <h4 class="text-center ag-padding-bottom">Valda taggar:</h4>
+                  <div class="col-md-4 col-md-offset-4">
+                  <span ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></span>
+                  </div>
+                </div>
+                <button class="btn btn-default col-md-2 col-md-offset-5 ag-padding-top">Klar</button>
+                </div>
+                <div class="col-md-12 row">
+                <div class="col-md-3 col-md-offset-1">
+                <h3>{{categoryOne.name}}</h3>
+                  <span ng-repeat="categoryOne_tag in categoryOne_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryOne_tag.id); addTagToSearch(categoryOne_tag.id); getFilterTags()"><span>{{categoryOne_tag.name}} </span></span>
+                </div>
+                <div class="col-md-3 col-md-offset-1">
+                <h3>{{categoryTwo.name}}</h3>
+                </div>
+                <div class="col-md-3 col-md-offset-1">
+                <h3>{{categoryThree.name}}</h3>
+                </div>
+        <div class="modal-footer">
+          <div class="col-md-7 col-md-offset-1">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-3" ng-repeat="image in images" ng-if="$index < 4">
+                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-3" ng-repeat="image in images" ng-if="$index >= 4">
+                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
 
   </body>
 </html>

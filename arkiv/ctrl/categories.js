@@ -4,6 +4,7 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
   http method*/
 
   $scope.tagData = {};
+  $scope.categoryData = {};
 
   $scope.getCategories = function (){
     $http.get("api/get_categories.php")
@@ -55,11 +56,43 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
           // if not successful, bind errors to error variables
           $scope.errorTag = data.errors;
         } else {
-          $scope.formMessageAddress = data.message;
+          $scope.formMessageCategory = data.message;
           $scope.tagData.tag = "";
           $scope.getTagsForCategory($scope.category_id);
         }
       });
+  }
+
+  $scope.addCategory = function() {
+    $http({
+          method  : 'POST',
+          url     : 'api/add_category.php',
+          data    : $.param($scope.categoryData),
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+         })
+    .success(function(data) {
+        if (!data.success) {
+          // if not successful, bind errors to error variables
+          $scope.errorCategory = data.errors;
+        } else {
+          $scope.exists = data.exists;
+          $scope.categoryData.category = "";
+          $scope.getCategories();
+        }
+      });
+  }
+
+  $scope.removeCategory = function (categoryId){
+    $http({
+      url : "api/remove_category.php?category_id="+categoryId,
+      method : "POST"
+    }).success(function (response) {
+      if(response.success == true){
+        $scope.getCategories(); // för att visa nytt resultat efter borttagning av en tag
+      }else {
+        $scope.tag_error = response.errors.exists;
+      }
+    });
   }
 
 });

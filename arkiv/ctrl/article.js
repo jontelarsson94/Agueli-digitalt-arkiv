@@ -40,8 +40,15 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     //alert($scope.tagData);
   }
 
+  $scope.addOneTagToSearch = function (id){
+    //$scope.tagData = $scope.tagData + "," + id;
+    $scope.tagData = [];
+    $scope.tagData.push(id);
+    //alert($scope.tagData);
+  }
+
   $scope.addTagToSearchFromText = function (id){
-    $scope.tagData = []
+    $scope.tagData = [];
     $scope.tagData.push(id);
   }
 
@@ -107,11 +114,56 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     });
   }
 
+  $scope.getFilterTags = function (categoryOne_id, categoryTwo_id, categoryThree_id){
+      $scope.tagString = ""
+      for(var i=0;i<$scope.tagData.length;i++) {
+        $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
+      }
+      $http.get("api/get_filter_tags.php?tags="+$scope.tagString+"&categoryOne_id="+categoryOne_id+"&categoryTwo_id="+categoryTwo_id+"&categoryThree_id="+categoryThree_id)
+      .success(function (response) {
+        if(response.success == true){
+          $scope.filterTags = response.tags;
+          $scope.categoryOne_tags = response.categoryOne_tags;
+          $scope.categoryTwo_tags = response.categoryTwo_tags;
+          $scope.categoryThree_tags = response.categoryThree_tags;
+        }else {
+          $scope.articles_error = response.error;
+        }
+    });
+  }
+
   $scope.getPopularTags = function (){
     $http.get("api/get_popular_tags.php")
     .success(function (response) {
       if(response.success == true){
         $scope.popular_tags = response.tags;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.getTagsForModal = function (){
+    $http.get("api/get_tags_for_modal.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.categoryOne = response.categoryOne;
+        $scope.categoryTwo = response.categoryTwo;
+        $scope.categoryThree = response.categoryThree;
+        $scope.categoryOne_tags = response.categoryOne_tags;
+        $scope.categoryTwo_tags = response.categoryTwo_tags;
+        $scope.categoryThree_tags = response.categoryThree_tags;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.getTags = function (){
+    $http.get("api/get_tags.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.tags = response.tags;
       }else {
         $scope.articles_error = response.error;
       }

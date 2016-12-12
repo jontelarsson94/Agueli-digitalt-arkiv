@@ -203,3 +203,34 @@ this is the cc for cropping and rezising to middle
 .ag-lg{
   font-size: 22px;
 }
+
+.ag-white{
+  color:white;
+}
+
+.ag-yellow{
+  color:yellow;
+}
+
+.skill{
+  background-color: yellow;
+  padding: 1em;
+}
+
+.ag-padding{
+  padding-right: 4em;
+}
+
+.ag-border{
+  border-style: solid;
+  border-color: yellow;
+  padding-bottom: 4em;
+}
+
+.ag-padding-bottom{
+  padding-bottom: 2em;
+}
+
+.ag-padding-top{
+  margin-bottom: 1em;
+}
