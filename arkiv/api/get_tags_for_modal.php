@@ -24,7 +24,7 @@
       ], [
       "id" => $tag
       ]);
-    array_push($categoryOne_tags, $categoryOne_tag);
+    array_push($categoryOne_tags, ["id" => $categoryOne_tag["id"], "name" => $categoryOne_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
   }
 
   $tags = $database->select("category_tags", "tag_id", [
@@ -40,7 +40,7 @@
       ], [
       "id" => $tag
       ]);
-    array_push($categoryTwo_tags, $categoryTwo_tag);
+    array_push($categoryTwo_tags, ["id" => $categoryTwo_tag["id"], "name" => $categoryTwo_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
   }
 
   $tags = $database->select("category_tags", "tag_id", [
@@ -56,7 +56,7 @@
       ], [
       "id" => $tag
       ]);
-    array_push($categoryThree_tags, $categoryThree_tag);
+    array_push($categoryThree_tags, ["id" => $categoryThree_tag["id"], "name" => $categoryThree_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
   }
 
   //Set return statement

@@ -17,9 +17,14 @@
 <div class="container-fluid">
   <div class="col-md-4 col-md-offset-4">
     <div>
-        <span ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></span>
+        <div class="col-md-8">
+        <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
         <span class="ag-padding"></span>
-        <span data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill glyphicon glyphicon-plus fake-button">Tagg</span>
+        </div>
+        <div class="col-md-4">
+        <button data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill ag-padding glyphicon glyphicon-plus fake-button">Tagg</button>
+        </div>
+        <br><br>
     </div>
     <br>
   </div>
@@ -115,22 +120,24 @@
                 <br><br>
                 <div class="col-md-12 ag-border">
                   <h4 class="text-center ag-padding-bottom">Valda taggar:</h4>
-                  <div class="col-md-4 col-md-offset-4">
-                  <span ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></span>
+                  <div class="col-md-6 col-md-offset-3 row">
+                  <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
                   </div>
                 </div>
-                <button class="btn btn-default col-md-2 col-md-offset-5 ag-padding-top">Klar</button>
+                <button ng-click="getFilteredArticles()" data-dismiss="modal" class="btn btn-default col-md-2 col-md-offset-5 ag-padding-top">Klar</button>
                 </div>
                 <div class="col-md-12 row">
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryOne.name}}</h3>
-                  <span ng-repeat="categoryOne_tag in categoryOne_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryOne_tag.id); addTagToSearch(categoryOne_tag.id); getFilterTags()"><span>{{categoryOne_tag.name}} </span></span>
+                  <span ng-repeat="categoryOne_tag in categoryOne_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryOne_tag.id); addTagToSearch(categoryOne_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryOne_tag.articlesExists==1 && categoryOne_tag.tagExists==0">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.tagExists==1" class="ag-yellow">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.articlesExists==0 && categoryOne_tag.tagExists!=1" class="ag-stroke">{{categoryOne_tag.name}} </span></span>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryTwo.name}}</h3>
+                <span ng-repeat="categoryTwo_tag in categoryTwo_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryTwo_tag.id); addTagToSearch(categoryTwo_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryTwo_tag.articlesExists==1 && categoryTwo_tag.tagExists==0">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.tagExists==1" class="ag-yellow">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.articlesExists==0 && categoryTwo_tag.tagExists!=1" class="ag-stroke">{{categoryTwo_tag.name}} </span></span>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryThree.name}}</h3>
+                <span ng-repeat="categoryThree_tag in categoryThree_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryThree_tag.id); addTagToSearch(categoryThree_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryThree_tag.articlesExists==1 && categoryThree_tag.tagExists==0">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.tagExists==1" class="ag-yellow">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.articlesExists==0 && categoryThree_tag.tagExists!=1" class="ag-stroke">{{categoryThree_tag.name}} </span></span>
                 </div>
         <div class="modal-footer">
           <div class="col-md-7 col-md-offset-1">

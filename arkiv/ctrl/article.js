@@ -119,6 +119,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
       for(var i=0;i<$scope.tagData.length;i++) {
         $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
       }
+      alert($scope.tagString);
       $http.get("api/get_filter_tags.php?tags="+$scope.tagString+"&categoryOne_id="+categoryOne_id+"&categoryTwo_id="+categoryTwo_id+"&categoryThree_id="+categoryThree_id)
       .success(function (response) {
         if(response.success == true){
