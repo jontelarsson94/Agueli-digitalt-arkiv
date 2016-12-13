@@ -10,6 +10,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.page = 7;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
+  $scope.currentChar = "";
 
   $scope.getArticles = function (){
     $scope.isSelection = 0;
@@ -154,6 +155,23 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
         $scope.categoryTwo_tags = response.categoryTwo_tags;
         $scope.categoryThree_tags = response.categoryThree_tags;
         $scope.getFilterTags($scope.categoryOne.id, $scope.categoryTwo.id, $scope.categoryThree.id);
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.setCurrentChar = function(char){
+    $scope.currentChar = char;
+  }
+
+  $scope.getTagsForChar = function (categoryOne, categoryTwo, categoryThree){
+    //alert("api/get_tags_for_char.php?char=" + char + "&categoryOne_id=" + categoryOne + "&categoryTwo_id=" + categoryTwo + "&categoryThree_id=" + categoryThree + "&tags="+$scope.tagString)
+    $http.get("api/get_tags_for_char.php?char=" + $scope.currentChar + "&categoryOne_id=" + categoryOne + "&categoryTwo_id=" + categoryTwo + "&categoryThree_id=" + categoryThree + "&tags="+$scope.tagString)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.filterTags = response.tags;
+        $scope.char_tags = response.char_tags;
       }else {
         $scope.articles_error = response.error;
       }

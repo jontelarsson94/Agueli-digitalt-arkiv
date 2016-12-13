@@ -32,9 +32,9 @@
       <div class="col-md-12">
         <div class="col-md-10">
           <div ng-repeat="article in articles | limitTo:page">
-            <div ng-if="articles_lastRead[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_lastRead[$index].id); lastRead(articles_lastRead[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_lastRead[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles_lastRead[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
-            <div ng-if="articles_starred[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_starred[$index].id); lastRead(articles_starred[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_starred[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles_starred[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span></img></a></div></div>
-            <div class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive img-thumbnail ag-img-thumbnail ag-big-div"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
+            <div ng-if="articles_lastRead[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_lastRead[$index].id); lastRead(articles_lastRead[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_lastRead[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles_lastRead[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
+            <div ng-if="articles_starred[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_starred[$index].id); lastRead(articles_starred[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_starred[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles_starred[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span></img></a></div></div>
+            <div class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
           </div>
         </div>
         <div class="col-md-2">
@@ -121,7 +121,7 @@
                 <div class="col-md-12 ag-border">
                   <h4 class="text-center ag-padding-bottom">Valda taggar:</h4>
                   <div class="col-md-6 col-md-offset-3 row">
-                  <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
+                  <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
                   </div>
                 </div>
                 <button ng-click="getFilteredArticles()" data-dismiss="modal" class="btn btn-default col-md-2 col-md-offset-5 ag-padding-top">Klar</button>
@@ -129,33 +129,119 @@
                 <div class="col-md-12 row">
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryOne.name}}</h3>
-                  <span ng-repeat="categoryOne_tag in categoryOne_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryOne_tag.id); addTagToSearch(categoryOne_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryOne_tag.articlesExists==1 && categoryOne_tag.tagExists==0">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.tagExists==1" class="ag-yellow">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.articlesExists==0 && categoryOne_tag.tagExists!=1" class="ag-stroke">{{categoryOne_tag.name}} </span></span>
+                  <span ng-repeat="categoryOne_tag in categoryOne_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryOne_tag.id); addTagToSearch(categoryOne_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryOne_tag.articlesExists==1 && categoryOne_tag.tagExists==0">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.tagExists==1" class="ag-yellow">{{categoryOne_tag.name}} </span> <span ng-if="categoryOne_tag.articlesExists==0 && categoryOne_tag.tagExists!=1" class="ag-stroke">{{categoryOne_tag.name}} </span></span>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryTwo.name}}</h3>
-                <span ng-repeat="categoryTwo_tag in categoryTwo_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryTwo_tag.id); addTagToSearch(categoryTwo_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryTwo_tag.articlesExists==1 && categoryTwo_tag.tagExists==0">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.tagExists==1" class="ag-yellow">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.articlesExists==0 && categoryTwo_tag.tagExists!=1" class="ag-stroke">{{categoryTwo_tag.name}} </span></span>
+                <span ng-repeat="categoryTwo_tag in categoryTwo_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryTwo_tag.id); addTagToSearch(categoryTwo_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryTwo_tag.articlesExists==1 && categoryTwo_tag.tagExists==0">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.tagExists==1" class="ag-yellow">{{categoryTwo_tag.name}} </span> <span ng-if="categoryTwo_tag.articlesExists==0 && categoryTwo_tag.tagExists!=1" class="ag-stroke">{{categoryTwo_tag.name}} </span></span>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
                 <h3>{{categoryThree.name}}</h3>
-                <span ng-repeat="categoryThree_tag in categoryThree_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryThree_tag.id); addTagToSearch(categoryThree_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryThree_tag.articlesExists==1 && categoryThree_tag.tagExists==0">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.tagExists==1" class="ag-yellow">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.articlesExists==0 && categoryThree_tag.tagExists!=1" class="ag-stroke">{{categoryThree_tag.name}} </span></span>
+                <span ng-repeat="categoryThree_tag in categoryThree_tags | orderBy : 'tag.name'" class="fake-button" ng-click="addClickForTag(categoryThree_tag.id); addTagToSearch(categoryThree_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="categoryThree_tag.articlesExists==1 && categoryThree_tag.tagExists==0">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.tagExists==1" class="ag-yellow">{{categoryThree_tag.name}} </span> <span ng-if="categoryThree_tag.articlesExists==0 && categoryThree_tag.tagExists!=1" class="ag-stroke">{{categoryThree_tag.name}} </span></span>
                 </div>
         <div class="modal-footer">
-          <div class="col-md-7 col-md-offset-1">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-3" ng-repeat="image in images" ng-if="$index < 4">
-                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
-              </div>
+          <div class="col-md-12">
+          <br><br><br>
+          <ul class="ag-line-list">
+            <li>
+              <a ng-click="setCurrentChar('A'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">A</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('B'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">B</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('C'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">C</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('D'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">D</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('E'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">E</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('F'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">F</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('G'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">G</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('H'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">H</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('I'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">I</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('J'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">J</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('K'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">K</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('L'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">L</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('M'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">M</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('N'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">N</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('O'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">O</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('P'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">P</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Q'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Q</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('R'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">R</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('S'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">S</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('T'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">T</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('U'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">U</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('V'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">V</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('W'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">W</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('X'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">X</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Y'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Y</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Z'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Z</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Å'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Å</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Ä'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Ä</a>
+            </li>
+            <li>
+              <a ng-click="setCurrentChar('Ö'); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)" href="">Ö</a>
+            </li>
+          </ul>
+          </div>
+          <div class="container-fluid">
+          <div class="col-md-12 row">
+            <h3 class="col-md-1">{{currentChar}}</h3>
+          </div>
+          <div class="col-md-11 row">
+          <div class="col-md-12">
+            <span ng-repeat="char_tag in char_tags | orderBy : 'tag.name'" class="fake-button pull-left" ng-click="addClickForTag(char_tag.id); addTagToSearch(char_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-if="char_tag.articlesExists==1 && char_tag.tagExists==0">{{char_tag.name}}&nbsp;</span> <span ng-if="char_tag.tagExists==1" class="ag-yellow">{{char_tag.name}}&nbsp;</span> <span ng-if="char_tag.articlesExists==0 && char_tag.tagExists!=1" class="ag-stroke">{{char_tag.name}}&nbsp;</span></span>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-3" ng-repeat="image in images" ng-if="$index >= 4">
-                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
       </div>
     </div>

@@ -113,12 +113,12 @@ p{
   color:black;
 }
 
-/*
+.ag-card.image{
+
 object-fit: cover;  //Do not scale the image 
 object-position: center;  //Center the image within the element 
 
-this is the cc for cropping and rezising to middle
-*/
+}
 
 @media screen and (min-width: 800px) {
     .ag-big-div{
@@ -241,4 +241,14 @@ this is the cc for cropping and rezising to middle
 
 .ag-stroke{
   text-decoration: line-through;
+}
+
+.ag-line-list li{
+  display: inline;
+  float: left;
+  padding-right: 1em;
+}
+
+.ag-float-left{
+  float: left;
 }
