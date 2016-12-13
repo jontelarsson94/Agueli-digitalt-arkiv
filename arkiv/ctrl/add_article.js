@@ -50,6 +50,23 @@ $scope.addTagForArticle = function (tagId, articleId){
     });
   }
 
+  $scope.getArticle = function (id){
+    $http.get("api/get_article_for_id.php?article_id="+id)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.article = response.article;
+        $scope.tags = response.tags;
+        $scope.images = response.images;
+        $scope.card_image = response.card_image;
+        $scope.body_images = response.body_images;
+        $scope.bodies = response.bodies;
+        $scope.article_message = response.message;
+      }else {
+        $scope.article_error = response.error;
+      }
+    });
+  }
+
 $scope.removeTagForArticle = function (tagId, articleId){
     $http({
       url : "api/remove_tag_for_article.php?tag_id="+tagId+"&article_id="+articleId,

@@ -35,6 +35,19 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     });
   }
 
+  $scope.getArticlesAdmin = function (){
+    $scope.isSelection = 0;
+    $http.get("api/get_articles_admin.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.articles = response.result;
+        $scope.main_images = response.main_images;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
   $scope.addTagToSearch = function (id){
     //$scope.tagData = $scope.tagData + "," + id;
     $scope.tagData.push(id);
@@ -228,6 +241,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
         $scope.article = response.article;
         $scope.tags = response.tags;
         $scope.images = response.images;
+        $scope.card_image = response.card_image;
         $scope.body_images = response.body_images;
         $scope.bodies = response.bodies;
         $scope.article_message = response.message;

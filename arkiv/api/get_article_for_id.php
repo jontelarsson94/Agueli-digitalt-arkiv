@@ -79,6 +79,16 @@
     }
   }*/
 
+  $card_image_id = $database->get("article_images", "image_id", [
+    "article_id" => $article_id
+  ]);
+
+  $card_image = $database->get("images", [
+        "url"
+      ], [
+        "id" => $card_image_id
+      ]);
+
   $image_ids = $database->select("article_images", "*", [
     "AND" => [
             "article_id" => $article_id,
@@ -123,6 +133,7 @@
   } else {
     $data['success'] = true;
     $data['message'] = 'Article retrieved!';
+    $data['card_image'] = $card_image;
     $data['article'] = $article;
     $data['bodies'] = $bodies;
     $data['tags'] = $tags;

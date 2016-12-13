@@ -260,3 +260,7 @@ object-position: center;  //Center the image within the element
 span:hover{
   color: blue;
 }
+
+.ag-small-img{
+  width:50%;
+}
