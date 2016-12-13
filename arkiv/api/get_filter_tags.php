@@ -16,7 +16,7 @@
       $query = "SELECT article_id FROM article_tags WHERE tag_id = " . $value;
     }
     if($key > 1){
-      $query = "SELECT tag_id from article_tags where article_id IN (" . $query . ") AND tag_id= " . $value;
+      $query = "SELECT article_id from article_tags where article_id IN (" . $query . ") AND tag_id= " . $value;
     }
     if($key > 0){
       $tag = $database->get("tags", [
