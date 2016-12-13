@@ -18,9 +18,7 @@
       "tag_id" => $tag_id,
       "article_id" => $article_id
     ]);
-  }
-
-  $count = $database->get("tags", "count", [
+    $count = $database->get("tags", "count", [
     "id" => $tag_id
     ]);
 
@@ -29,6 +27,7 @@
       ], [
         'id' => $tag_id
       ]);
+  }
 
 
   //Set return statement

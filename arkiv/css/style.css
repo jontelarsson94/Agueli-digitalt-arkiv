@@ -252,3 +252,11 @@ object-position: center;  //Center the image within the element
 .ag-float-left{
   float: left;
 }
+
+.ag-black{
+  background-color: rgb(107,106,106);
+}
+
+span:hover{
+  color: blue;
+}

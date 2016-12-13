@@ -10,6 +10,7 @@
     "category_id" => $category_id
   ]);
 
+
   $database->delete("categories", [
     "id" => $category_id
     ]);
