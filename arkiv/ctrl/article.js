@@ -153,6 +153,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
         $scope.categoryOne_tags = response.categoryOne_tags;
         $scope.categoryTwo_tags = response.categoryTwo_tags;
         $scope.categoryThree_tags = response.categoryThree_tags;
+        $scope.getFilterTags($scope.categoryOne.id, $scope.categoryTwo.id, $scope.categoryThree.id);
       }else {
         $scope.articles_error = response.error;
       }
