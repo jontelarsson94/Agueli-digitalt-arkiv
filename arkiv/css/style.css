@@ -264,3 +264,9 @@ span:hover{
 .ag-small-img{
   width:50%;
 }
+
+.ag-update-border{
+  border-style: solid;
+  border-color: black;
+  padding: 2em;
+}
