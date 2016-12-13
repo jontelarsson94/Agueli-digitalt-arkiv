@@ -20,6 +20,16 @@
     ]);
   }
 
+  $count = $database->get("tags", "count", [
+    "id" => $tag_id
+    ]);
+
+  $database->update("tags", [
+        'count' => $count+1
+      ], [
+        'id' => $tag_id
+      ]);
+
 
   //Set return statement
   if (!empty($errors)) {
