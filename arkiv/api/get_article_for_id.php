@@ -80,7 +80,10 @@
   }*/
 
   $card_image_id = $database->get("article_images", "image_id", [
-    "article_id" => $article_id
+    "AND" => [
+            "article_id" => $article_id,
+            "isCardImage" =>  1,
+    ]
   ]);
 
   $card_image = $database->get("images", [

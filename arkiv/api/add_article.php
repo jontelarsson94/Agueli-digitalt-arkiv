@@ -21,7 +21,7 @@ $articleId = $database->insert("articles", [
   "star" => $favorite
 ]);
 
-/*if(!empty($_POST['tags']))
+if(!empty($_POST['tags']))
 {
   $tags = explode(", ", $_POST['tags']);
   foreach ($tags as $tag) {
@@ -51,7 +51,7 @@ $articleId = $database->insert("articles", [
        ]);
 
   }
-}*/
+}
 
 if(!empty($_FILES['cardImage']['name'])){
   $fileId = UploadSingleFile("cardImage", $database);
@@ -64,9 +64,10 @@ if(!empty($_FILES['cardImage']['name'])){
   ]);
 }
 
-if(!empty($_FILES['image']['name'][0])){
+if(isset($_FILES['image']['name'][0])){
 $index = 0;
 foreach ($_FILES['image']['name'] as $imp) {
+  if(!empty($_FILES['image']['name'][$index])){
   $fileId = UploadFile('image', $database, $index);
 
   $database->insert("article_images", [
@@ -74,6 +75,17 @@ foreach ($_FILES['image']['name'] as $imp) {
     "article_id" => $articleId,
     "section" => $index+1
   ]);
+}else{
+  $fileId = $database->insert("images", [
+    "url" => NULL
+  ]);
+
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => $index+1
+  ]);
+}
 
   $index = $index+1;
 }
@@ -95,7 +107,7 @@ foreach ($_FILES['fileToUpload']['name'] as $imp) {
 }
 }
 
-if(!empty($_POST['body'][0])){
+if(isset($_POST['body'][0])){
   $index = 1;
   foreach($_POST['body'] as $body){
     $database->insert("article_texts", [
@@ -106,6 +118,8 @@ if(!empty($_POST['body'][0])){
     $index = $index+1;
   }
 }
+
+//testa att lägga till tom om $_POST[body][0] är tom eller vad som händer med isset
 
 //Set return statement
 /*if (!empty($errors)) {
@@ -120,6 +134,6 @@ if(!empty($_POST['body'][0])){
 //here we should show the article
 echo json_encode($data);*/
 
-echo '<script type="text/javascript">window.location = "../add_tags_for_article.php?article_id=' . $articleId . '"</script>';
+//echo '<script type="text/javascript">window.location = "../add_tags_for_article.php?article_id=' . $articleId . '"</script>';
 
  ?>

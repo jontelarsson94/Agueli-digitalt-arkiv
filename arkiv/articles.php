@@ -69,7 +69,7 @@
                     <br>
                     <div ng-repeat="body in bodies">
                       <p>{{body.body}}</p>
-                      <div ng-repeat="image in body_images" ng-if="image.section == body.section">
+                      <div ng-repeat="image in body_images" ng-if="image.section == body.section && image.url != NULL">
                         <img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
                       </div>
                     </div>

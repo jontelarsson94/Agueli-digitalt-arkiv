@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -9,34 +8,16 @@
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
-    <script src="ctrl/article.js"></script>
+    <script src="ctrl/add_article.js"></script>
   </head>
-  <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles()">
-    <?php require_once 'inc/navbar.php'; ?>
-    <!-- Button trigger modal -->
-<button ng-repeat="test in articles" ng-click="getArticle(test.id)" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo
-</button>
+  <body ng-app="add_article" ng-controller="add_articleCtrl" ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>" ng-cloak>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">{{article.title}}</h4>
-      </div>
-      <div class="modal-body">
-        <p ng-model="article.title">
-          {{article.title}}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+
+    <div class="row">
+     <ul ng-init="getTags()">
+       <li ng-repeat="tag in tags">{{tag.name}}</li>
+     </ul>
     </div>
-  </div>
-</div>
-  </body>
+
 </html>

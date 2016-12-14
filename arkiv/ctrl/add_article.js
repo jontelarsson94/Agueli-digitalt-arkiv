@@ -21,6 +21,7 @@ angular.module('add_article', []).controller('add_articleCtrl', function($scope,
     .success(function (response) {
       if(response.success == true){
         $scope.tags = response.result;
+        $scope.updateTags = response.result;
       }else {
         //alert('error');
       }

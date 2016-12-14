@@ -19,7 +19,7 @@
     <h1 class="center-text">Click On Article To Change It</h1>
       <div class="col-md-12">
         <div class="col-md-10">
-          <div ng-repeat="article in articles | limitTo:page">
+          <div ng-repeat="article in articles">
             <div class="col-lg-4 col-md-6"><div><a href="update_article.php?article_id={{article.id}}"><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title}}</h4></div></img></a></div></div>
           </div>
         </div>
