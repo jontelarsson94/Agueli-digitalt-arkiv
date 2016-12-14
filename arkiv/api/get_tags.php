@@ -16,7 +16,7 @@
     $data['errors']  = $errors;
   } else {
     $data['success'] = true;
-    $data['category'] = $category;
+    //$data['category'] = $category;
     $data['result'] = $tags;
   }
   //Return data

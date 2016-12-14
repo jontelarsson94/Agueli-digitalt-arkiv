@@ -22,34 +22,35 @@
                     <input type="text" class="form-control" name="title" id="title" ng-model="articleData.title">
                   </div>
                   <div class="form-group">
-                    <label for="summary">Summary</label>
+                    <label for="summary">Sammanfattning</label>
                     <textarea class="form-control" rows="4" cols="25" name="summary" id="summary" ng-model="articleData.summary"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="image1">Choose your image to show on the card (VERY RECOMMENDED)</label>
+                    <label for="image1">Välj bild som visas på kortet (Väldigt rekommenderat)</label>
                     <input class="form-control" type="file" name="cardImage" id="cardImage"></div>
                   <div class="body_fields_wrap">
                     <div class="form-group">
-                    <label for="image[]">Optional image before section 1</label>
-                    <input class="form-control" type="file" name="image[]"></div>
-                  <div class="form-group">
-                    <label for="body[]">Optional text (section 1)</label>
+                    <label for="body[]">Frivillig text (stycke 1)</label>
                     <textarea class="form-control" rows="10" cols="25" name="body[]"></textarea>
+                  <div class="form-group">
+                  <label for="image[]">Frivillig bild efter stycke 1</label>
+                    <input class="form-control" type="file" name="image[]"></div>
                   </div>
                   </div>
-                  <button class="add_body_button">Add more sections of image and text</button>
+                  <button class="add_body_button">Lägg till fler stycken av text och bild</button>
                   <div class="input_fields_wrap">
                   <br><br>
+                    <h3>Galleri</h3>
                     <div class="form-group"><input class="form-control" type="file" name="fileToUpload[]"></div>
                   </div>
-                  <button class="add_field_button">Add more fields for gallery images</button>
+                  <button class="add_field_button">Lägg till fler galleri-bilder</button>
                   <div class="form-group">
                     <br><br>
-                    <label>Add as favorite:</label>
-                    <label class="radio-inline"><input type="radio" name="favorite" value="1">Yes</label>
-                    <label class="radio-inline"><input type="radio" name="favorite" value="0" checked="checked">No</label>
+                    <label>Stjärnmärk artikel:</label>
+                    <label class="radio-inline"><input type="radio" name="favorite" value="1">Ja</label>
+                    <label class="radio-inline"><input type="radio" name="favorite" value="0" checked="checked">Nej</label>
                   </div>
-                  <button type="submit" class="btn btn-default" name="submit">Submit</button>
+                  <button type="submit" class="btn btn-default" name="submit">Lägg till</button>
             </form>
       </div>
     </div>

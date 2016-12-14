@@ -71,6 +71,7 @@
       if($articles_starred[$index] != NULL){
         array_push($articles, ["id" => $articles_starred[$index]["id"], "title" => $articles_starred[$index]["title"], "summary" => $articles_starred[$index]["summary"], "starred" => 1, "read" => 0]);
       }
+      $index = $index+1;
     }
   }
 

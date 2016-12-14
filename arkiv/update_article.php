@@ -88,6 +88,23 @@
           </div>
       </div>
     </div>
+    <div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1" ng-init="getTagsForArticle(article_id)">
+    <h3>Nuvarande taggar för artikeln:</h3>
+      <ul class="list-group">
+        <li ng-repeat="article_tag in article_tags" class="list-group-item col-md-2"><a>{{article_tag.name}}</a><span ng-click="removeTagForArticle(article_tag.id, article_id)" class="glyphicon glyphicon-remove pull-right ag-red fake-button"></span></li>
+      </ul>
+      <div>
+      <br><br><br>
+      <ul class="list-group" ng-init="getTags()">
+        <li ng-repeat="tag in tags" class="list-group-item col-md-2"><a>{{tag.name}}</a><span ng-click="addTagForArticle(tag.id, article_id)" class="glyphicon glyphicon-plus pull-right fake-button"></span></li>
+      </ul>
+      </div>
+    </div>
+    <div class="row col-md-12">
+    <br>
+      <a href="articles.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Updating Article</button></a>
+    </div>
+    </div>
 
-  </body>
 </html>

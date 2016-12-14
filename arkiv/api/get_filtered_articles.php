@@ -33,11 +33,12 @@
   foreach($article_ids as $article_id){
     $article = $database->get("articles", [
 	      "id",
-	      "title"
+	      "title",
+        "summary"
     ], [
 	      "id" => $article_id["article_id"]
       ]);
-    array_push($articles, ["id" => $article['id'], "title" => $article['title']]);
+    array_push($articles, ["id" => $article['id'], "title" => $article['title'], "summary" => $article["summary"], "starred" => 0, "read" => 0]);
     //echo $article['title'];
     $main_image_id = $database->get("article_images", [
       "image_id"
@@ -50,7 +51,7 @@
     ]);
     array_push($main_images, $main_image_url);
   }
-  $data['query'] = "SELECT title FROM article_tags" . $query;
+  //$data['query'] = "SELECT title FROM article_tags" . $query;
   $data['success'] = true;
   $data['message'] = 'Articles retrieved!';
   $data['main_images'] = $main_images;

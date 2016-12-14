@@ -68,10 +68,10 @@
                   <div class="col-md-7">
                     <br>
                     <div ng-repeat="body in bodies">
+                      <p>{{body.body}}</p>
                       <div ng-repeat="image in body_images" ng-if="image.section == body.section">
                         <img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
                       </div>
-                      <p>{{body.body}}</p>
                     </div>
                     <div ng-if="bodies.length < body_images.length" ng-repeat="image in body_images">
                         <img ng-if="$index >= bodies.length" src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">

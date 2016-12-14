@@ -110,7 +110,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x_body < max_fields_body){ //max input box allowed
             x_body++; //text box increment
-            $(wrapper_body).append('<div class="form-group"><label for="image[]">Optional image before section ' + x_body + '</label><input class="form-control" type="file" name="image[]"><br><label for="body[]">Optional text (section ' + x_body + ')</label><textarea class="form-control" rows="10" cols="25" name="body[]"></textarea><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper_body).append('<div class="form-group"><label for="body[]">Frivillig text (sektion ' + x_body + ')</label><textarea class="form-control" rows="10" cols="25" name="body[]"></textarea><br><label for="image[]">Frivillig bild efter sektion ' + x_body + '</label><input class="form-control" type="file" name="image[]"><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
     });
 

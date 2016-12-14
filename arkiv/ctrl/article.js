@@ -7,7 +7,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.lastReadId = 0;
   $scope.tagData = [];
   $scope.tagDataString = ""
-  $scope.page = 7;
+  $scope.page = 9;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
   $scope.currentChar = "";
@@ -17,7 +17,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
     $http.get("api/get_articles.php")
     .success(function (response) {
       if(response.success == true){
-        $scope.page = 7;
+        $scope.page = 9;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
@@ -75,7 +75,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   }
 
   $scope.loadMore = function (){
-    $scope.page = $scope.page+7;
+    $scope.page = $scope.page+9;
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }
