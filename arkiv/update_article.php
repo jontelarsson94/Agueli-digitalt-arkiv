@@ -17,7 +17,8 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2" ng-init="getArticle(article_id)">
                 <form class="ag-update-border" action="api/update_title.php" method="post">
-                  <div class="form-group">
+                <h3>Titel:</h3>
+                  <div class="form-group ag-update-border">
                     <label for="title">Titel</label>
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                     <input type="text" class="form-control" name="title" id="title" value="{{article.title}}">
@@ -25,7 +26,8 @@
                   </div>
                   </form>
                   <form class="ag-update-border" action="api/update_summary.php" method="post">
-                  <div class="form-group">
+                  <h3>Sammanfattning:</h3>
+                  <div class="form-group ag-update-border">
                     <label for="summary">Sammanfattning</label>
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                     <textarea class="form-control" rows="4" cols="25" name="summary" id="summary">{{article.summary}}</textarea>
@@ -33,7 +35,8 @@
                   </div>
                   </form>
                   <form class="ag-update-border" action="api/update_cardImage.php" method="post" enctype="multipart/form-data">
-                  <div class="form-group">
+                  <h3>Kort-bild:</h3>
+                  <div class="form-group ag-update-border">
                   <img class="img-thumbnail ag-small-img" src="img/{{card_image.url}}"></img>
                   <label>Nuvarande bild på kortet</label>
                   <br><br>
@@ -43,7 +46,8 @@
                     <button type="submit" class="btn btn-primary">Uppdatera bilden på kortet</button><br><br><br>
                   </div>
                   </form>
-                  <div class="form-group">
+                  <div class="form-group ag-update-border">
+                  <h3>Texter:</h3>
                   <div ng-repeat="body in bodies">
                   <form class="ag-update-border" action="api/update_body.php" method="post">
                   <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
@@ -62,7 +66,8 @@
                     </form>
                   </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group ag-update-border">
+                  <h3>Bilder i text</h3>
                     <div ng-repeat="body_image in body_images">
                     <form class="ag-update-border" action="api/update_bodyImage.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
@@ -70,8 +75,8 @@
                       <img class="img-thumbnail ag-small-img" src="img/{{body_image.url}}"></img>
                       <label>Nuvarande bild efter sektion {{$index+1}}</label>
                       <br><br>
-                      <label for="image[]">Välj bild och klicka uppdatera för att uppdatera bilden efter sektion {{$index+1}}</label>
-                      <input class="form-control" type="file" name="image[]" id="image[]">
+                      <label for="image[{{$index}}]">Välj bild och klicka uppdatera för att uppdatera bilden efter sektion {{$index+1}}</label>
+                      <input class="form-control" type="file" name="image[{{$index}}]" id="image[{{$index}}]">
                       <button type="submit" class="btn btn-primary">Uppdatera bild efter sektion {{$index+1}}</button>
                       <br><br><br>
                     </form>
@@ -85,8 +90,9 @@
                     </form>
                   </div>
                   <div class="form-group">
+                  <h3>Galleribilder:</h3>
                     <div ng-repeat="image in images">
-                    <form class="ag-update-border" action="api/update_bottomImage.php" method="post" enctype="multipart/form-data">
+                    <form class="ag-update-border" action="api/update_galleryImage.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                     <input type="hidden" value="{{$index}}" name="index" id="index">
                       <img class="img-thumbnail ag-small-img" src="img/{{image.url}}"></img>
@@ -98,6 +104,13 @@
                       <br><br><br>
                     </form>
                     </div>
+                  </div>
+                  <div>
+                    <form class="ag-update-border" action="api/add_galleryImage_to_article.php" method="post">
+                      <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
+                      <input type="hidden" value="{{images.length+1}}" name="index" id="index">
+                      <button type="submit" class="btn btn-primary">Lägg till bild till galleriet</button>
+                    </form>
                   </div>
           </div>
       </div>

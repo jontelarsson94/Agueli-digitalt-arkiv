@@ -8,33 +8,34 @@ $data = array();
 $article_id = $_REQUEST['article_id'];
 $index = $_REQUEST['index'];
 
+if(!empty($_FILES['fileToUpload']['name'][$index])){
 
-if(!empty($_FILES['image']['name'][$index])){
-
-  $fileId = UploadFile('image', $database, $index);
+  $fileId = UploadFile('fileToUpload', $database, $index);
 
   $database->update("article_images", [
     "image_id" => $fileId
   ],[
-  	"AND" =>[
-  	"article_id" => $article_id,
-    "section" => $index+1
-  	]
+    "AND" =>[
+    "article_id" => $article_id,
+    "section" => 0,
+    "galleryNumber" => $index+1
+    ]
   ]);
 }
 else{
 
-  $imageId = $database->get("article_images", "image_id", [
-    "AND" =>[
-      "article_id" => $article_id,
-      "section" => $index+1
-    ]
-  ]);
-
-  $database->update("images", [
+  $imageId = $database->insert("images", [
     "url" => NULL
+    ]);
+
+  $database->update("article_images", [
+    "image_id" => $imageId
   ],[
-    "id" => $imageId
+    "AND" =>[
+    "article_id" => $article_id,
+    "section" => 0,
+    "galleryNumber" => $index+1
+    ]
   ]);
 }
 

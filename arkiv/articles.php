@@ -88,14 +88,14 @@
           <div class="row">
             <div class="col-md-12">
               <div class="col-md-3" ng-repeat="image in images" ng-if="$index < 4">
-                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
+                <a ng-if="image.url != NULL" target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="col-md-3" ng-repeat="image in images" ng-if="$index >= 4">
-                <a target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
+                <a ng-if="image.url != NULL" target="_blank" href="img/{{image.url}}"><img class="img-responsive thumbnail" src="img/{{image.url}}" alt="gallery-image"/></a>
               </div>
             </div>
           </div>

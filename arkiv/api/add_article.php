@@ -100,7 +100,8 @@ foreach ($_FILES['fileToUpload']['name'] as $imp) {
   $database->insert("article_images", [
     "image_id" => $fileId,
     "article_id" => $articleId,
-    "section" => 0
+    "section" => 0,
+    "galleryNumber" => $index+1
   ]);
 
   $index = $index+1;
