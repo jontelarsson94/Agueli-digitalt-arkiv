@@ -32,9 +32,10 @@
       <div class="col-md-12">
         <div class="col-md-10">
           <div ng-repeat="article in articles | limitTo:page">
-            <div ng-if="articles_lastRead[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_lastRead[$index].id); lastRead(articles_lastRead[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_lastRead[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles_lastRead[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
-            <div ng-if="articles_starred[$index].id" class="col-lg-4 col-md-6"><div ng-click="getArticle(articles_starred[$index].id); lastRead(articles_starred[$index].id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images_starred[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles_starred[$index].title}}</h4></div><span class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span></img></a></div></div>
-            <div class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{articles[$index].title}}</h4></div></img></a></div></div>
+            <div ng-if="article.starred == 1 && article.read == 0" class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title}}</h4></div><span class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span></img></a></div></div>
+            <div ng-if="article.starred == 0 && article.read == 0" class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title}}</h4></div><span class="pull-right glyphicon ag-glyph-overlay"></span></img></a></div></div>
+            <div ng-if="article.read == 1" class="col-lg-4 col-md-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title}}</h4></div><span class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
+
           </div>
         </div>
         <div class="col-md-2">
@@ -70,7 +71,7 @@
                       <div ng-repeat="image in body_images" ng-if="image.section == body.section">
                         <img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
                       </div>
-                      <p compile="body.body"></p>
+                      <p>{{body.body}}</p>
                     </div>
                     <div ng-if="bodies.length < body_images.length" ng-repeat="image in body_images">
                         <img ng-if="$index >= bodies.length" src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
