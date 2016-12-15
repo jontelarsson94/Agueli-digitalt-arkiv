@@ -135,6 +135,6 @@ if(isset($_POST['body'][0])){
 //here we should show the article
 echo json_encode($data);*/
 
-//echo '<script type="text/javascript">window.location = "../add_tags_for_article.php?article_id=' . $articleId . '"</script>';
+echo '<script type="text/javascript">window.location = "../add_tags_for_article.php?article_id=' . $articleId . '"</script>';
 
  ?>
