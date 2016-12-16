@@ -15,8 +15,10 @@ if(!empty($_REQUEST['summary'])){
   ], [
    "id" => $article_id
   ]);
+  
+  $data['success'] = true;
 }
 
-echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
-
+//echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+echo json_encode($data);
  ?>

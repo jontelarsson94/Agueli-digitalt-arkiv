@@ -12,7 +12,7 @@
   //$small = $medium*0.5;
   //$large = $medium*1.5;
   $counter = 0;
-  $tag_ids = $database->query("SELECT id, name, clicks FROM tags ORDER BY clicks LIMIT 15")->fetchAll();
+  $tag_ids = $database->query("SELECT id, name, clicks FROM tags ORDER BY clicks DESC LIMIT 15")->fetchAll();
   $tags = array();
   foreach($tag_ids as $tag_id){
     $counter = $counter + $tag_id['clicks'];

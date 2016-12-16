@@ -1,6 +1,8 @@
 angular.module('add_article', []).controller('add_articleCtrl', function($scope, $http) {
 
 	$scope.tagData = [];
+  $scope.addTagData = {};
+  $scope.articleData = {};
 
   $scope.addTag = function (id){
     //$scope.tagData = $scope.tagData + "," + id;
@@ -16,11 +18,111 @@ angular.module('add_article', []).controller('add_articleCtrl', function($scope,
     }
   }
 
-  $scope.getTags = function (){
-    $http.get("api/get_tags.php")
+  $scope.addTagForArticleText = function(id) {
+    $http({
+          method  : 'POST',
+          url     : 'api/add_tag_for_article_text.php?article_id=' + id,
+          data    : $.param($scope.addTagData),
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+         })
+    .success(function(data) {
+        if (!data.success) {
+          // if not successful, bind errors to error variables
+          //$scope.errorTag = data.errors;
+        } else {
+          $scope.formMessageCategory = data.message;
+          $scope.addTagData.tag = "";
+          $scope.getTagsForArticle(id);
+        }
+      });
+  }
+
+  $scope.updateTitle = function(id) {
+    $http({
+          method  : 'POST',
+          url     : 'api/update_title.php?article_id=' + id,
+          data    : $.param($scope.article),
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+         })
+    .success(function(data) {
+        if (!data.success) {
+          // if not successful, bind errors to error variables
+          $scope.errorTitle = "Du måste ha en titel";
+          $scope.errorSummary = "";
+        } else {
+          $scope.errorSummary = "";
+          $scope.errorTitle = "Uppdaterat titel!";
+          //alert(JSON.stringify(data.title));
+          //alert(JSON.stringify(data.article_id));
+        }
+      });
+  }
+
+  $scope.updateSummary = function(id) {
+    $http({
+          method  : 'POST',
+          url     : 'api/update_summary.php?article_id=' + id,
+          data    : $.param($scope.article),
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+         })
+    .success(function(data) {
+        if (!data.success) {
+          alert("hej");
+          $scope.errorTitle = "";
+          // if not successful, bind errors to error variables
+          //$scope.errorTitle = "Du måste ha en titel";
+        } else {
+          $scope.errorTitle = "";
+          $scope.errorSummary = "Uppdaterat sammanfattning!";
+          //alert(JSON.stringify(data.title));
+          //alert(JSON.stringify(data.article_id));
+        }
+      });
+  }
+
+  $scope.addTextToArticle = function (articleId, index){
+    $http({
+      url : "api/add_text_to_article.php?index="+index+"&article_id="+articleId,
+      method : "POST"
+    }).success(function (response) {
+      if(response.success == true){
+        $scope.getArticle(articleId); // för att visa nytt resultat efter borttagning av en tag
+      }else {
+        //$scope.tag_error = response.errors.exists;
+      }
+    });
+  }
+
+  $scope.addImageToArticle = function (articleId, index){
+    $http({
+      url : "api/add_image_to_article.php?index="+index+"&article_id="+articleId,
+      method : "POST"
+    }).success(function (response) {
+      if(response.success == true){
+        $scope.getArticle(articleId); // för att visa nytt resultat efter borttagning av en tag
+      }else {
+        //$scope.tag_error = response.errors.exists;
+      }
+    });
+  }
+
+  $scope.addGalleryImageToArticle = function (articleId, index){
+    $http({
+      url : "api/add_galleryImage_to_article.php?index="+index+"&article_id="+articleId,
+      method : "POST"
+    }).success(function (response) {
+      if(response.success == true){
+        $scope.getArticle(articleId); // för att visa nytt resultat efter borttagning av en tag
+      }else {
+        //$scope.tag_error = response.errors.exists;
+      }
+    });
+  }
+
+  $scope.getTagsToAdd = function (articleId){
+    $http.get("api/get_tags_to_add.php?article_id="+articleId)
     .success(function (response) {
       if(response.success == true){
-        $scope.tags = response.result;
         $scope.updateTags = response.result;
       }else {
         //alert('error');
@@ -31,8 +133,9 @@ angular.module('add_article', []).controller('add_articleCtrl', function($scope,
   $scope.getTagsForArticle = function (id){
     $http.get("api/get_tags_for_article.php?article_id=" + id)
     .success(function (response) {
-      if(response.success == true){  
+      if(response.success == true){ 
       	$scope.article_tags = response.result; 
+        $scope.getTagsToAdd(id);
       }else {
       }
     });
@@ -45,6 +148,7 @@ $scope.addTagForArticle = function (tagId, articleId){
     }).success(function (response) {
       if(response.success == true){
         $scope.getTagsForArticle(articleId); // för att visa nytt resultat efter borttagning av en tag
+        $scope.getTagsToAdd(articleId);
       }else {
         $scope.tag_error = response.errors.exists;
       }
@@ -56,6 +160,7 @@ $scope.addTagForArticle = function (tagId, articleId){
     .success(function (response) {
       if(response.success == true){
         $scope.article = response.article;
+        $scope.articleData.title = $scope.article.title;
         $scope.tags = response.tags;
         $scope.images = response.images;
         $scope.card_image = response.card_image;

@@ -16,22 +16,22 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2" ng-init="getArticle(article_id)">
-                <form class="ag-update-border" action="api/update_title.php" method="post">
+                <form class="ag-update-border" ng-submit="updateTitle(article_id);" role="form">
                 <h3>Titel:</h3>
                   <div class="form-group ag-update-border">
                     <label for="title">Titel</label>
-                    <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
-                    <input type="text" class="form-control" name="title" id="title" value="{{article.title}}">
+                    <input type="text" class="form-control" name="title" id="title" ng-model="article.title">
                     <button type="submit" class="btn btn-primary">Uppdatera titel</button>
+                    {{errorTitle}}
                   </div>
                   </form>
-                  <form class="ag-update-border" action="api/update_summary.php" method="post">
+                  <form class="ag-update-border" ng-submit="updateSummary(article_id);" role="form">
                   <h3>Sammanfattning:</h3>
                   <div class="form-group ag-update-border">
                     <label for="summary">Sammanfattning</label>
-                    <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
-                    <textarea class="form-control" rows="4" cols="25" name="summary" id="summary">{{article.summary}}</textarea>
+                    <textarea class="form-control" rows="4" cols="25" name="summary" id="summary" ng-model="article.summary"></textarea>
                     <button type="submit" class="btn btn-primary">Uppdatera sammanfattning</button>
+                    {{errorSummary}}
                   </div>
                   </form>
                   <form class="ag-update-border" action="api/update_cardImage.php" method="post" enctype="multipart/form-data">
@@ -59,9 +59,7 @@
                   </form>
                   </div>
                   <div>
-                    <form class="ag-update-border" action="api/add_text_to_article.php" method="post">
-                      <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
-                      <input type="hidden" value="{{bodies.length+1}}" name="index" id="index">
+                    <form class="ag-update-border" ng-submit="addTextToArticle(article_id, bodies.length+1);" role="form">
                       <button type="submit" class="btn btn-primary">Lägg till text (sektion {{bodies.length+1}})</button>
                     </form>
                   </div>
@@ -83,9 +81,7 @@
                     </div>
                   </div>
                   <div>
-                    <form class="ag-update-border" action="api/add_image_to_article.php" method="post">
-                      <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
-                      <input type="hidden" value="{{body_images.length+1}}" name="index" id="index">
+                    <form class="ag-update-border" ng-submit="addImageToArticle(article_id, body_images.length+1)" role="form">
                       <button type="submit" class="btn btn-primary">Lägg till bild till sektion {{body_images.length+1}}</button>
                     </form>
                   </div>
@@ -106,9 +102,7 @@
                     </div>
                   </div>
                   <div>
-                    <form class="ag-update-border" action="api/add_galleryImage_to_article.php" method="post">
-                      <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
-                      <input type="hidden" value="{{images.length+1}}" name="index" id="index">
+                    <form class="ag-update-border" ng-submit="addGalleryImageToArticle(article_id, images.length+1)" role="form">
                       <button type="submit" class="btn btn-primary">Lägg till bild till galleriet</button>
                     </form>
                   </div>
@@ -123,11 +117,19 @@
       </ul>
     </div>
     <div class="row col-md-12">
-      <br><br><br>
+      <br><br>
+      <h3>Lägg till tagg med text om du inte hittar eller den inte finns</h3>
+        <form class="col-md-4 col-md-offset-4" role="form" ng-submit="addTagForArticleText(article_id);" class="form-inline">
+          <input type="text" class="form-control" placeholder="Tag name" name="tag" id="tag" ng-model="addTagData.tag">
+          <button type="submit" class="btn btn-primary">Lägg till tag</button>
+        </form>
+      </div>
+    <div class="row col-md-12">
+      <br><br>
       <div>
       <br>
       <h3>Taggar du kan lägga till:</h3>
-      <ul class="list-group" ng-init="getTags()">
+      <ul class="list-group" ng-init="getTagsToAdd(article_id)">
         <li ng-repeat="tag in updateTags" class="list-group-item col-md-2">{{tag.name}}</a><span ng-click="addTagForArticle(tag.id, article_id)" class="glyphicon glyphicon-plus pull-right fake-button"></span></li>
       </ul>
       </div>

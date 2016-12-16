@@ -3,8 +3,8 @@
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
 //Arrays
-$errors = array();
-$data = array();
+//$errors = array();
+//$data = array();
 
 if(!empty($_FILES['cardImage']['name'])){
 
@@ -20,7 +20,7 @@ if(!empty($_FILES['cardImage']['name'])){
     "isCardImage" => 1
   	]
   ]);
-  var_dump($database->last_query());
+  //var_dump($database->last_query());
 }
 
 echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';

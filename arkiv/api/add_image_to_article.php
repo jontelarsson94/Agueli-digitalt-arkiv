@@ -15,6 +15,10 @@ $emptystring = "";
     "section" => $index
   ]);
 
-echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+$data['success'] = true;
+
+echo json_encode($data);
+
+//echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
 
 ?>

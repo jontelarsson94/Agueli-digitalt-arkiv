@@ -8,6 +8,8 @@ $data = array();
 if(!empty($_REQUEST['title'])){
   $article_id = $_REQUEST['article_id'];
   $title = $_REQUEST['title'];
+  $data['title'] = $title;
+  $data['article_id'] = $article_id;
 
 
   $database->update("articles", [
@@ -15,8 +17,11 @@ if(!empty($_REQUEST['title'])){
   ], [
    "id" => $article_id
   ]);
+  $data['success'] = true;
 }
 
-echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+//echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+
+echo json_encode($data);
 
  ?>

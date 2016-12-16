@@ -17,7 +17,22 @@
     $tag_id = $database->insert("tags", [
       "name" => $tag_name
     ]);
+    $data['message'] = "";
+  }else{
+    $exists = $database->get("category_tags", "tag_id", [
+      "AND" =>[
+        "category_id" => $category_id,
+        "tag_id" => $tag_id
+      ]
+      ]);
+    if($exists == false){
+      $data['message'] = "";
+    }
+    else{
+      $data['message'] = "That tag already exists in this category";
+    }
   }
+
 
   $database->insert("category_tags", [
     "tag_id" => $tag_id,

@@ -56,7 +56,7 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
           // if not successful, bind errors to error variables
           $scope.errorTag = data.errors;
         } else {
-          $scope.formMessageCategory = data.message;
+          $scope.message = data.message;
           $scope.tagData.tag = "";
           $scope.getTagsForCategory($scope.category_id);
         }

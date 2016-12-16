@@ -7,6 +7,10 @@
   $categoryTwo_id = $_REQUEST['categoryTwo_id'];
   $categoryThree_id = $_REQUEST['categoryThree_id'];
 
+  $medium = $database->avg("tags", "count");
+  $small = $medium*0.5;
+  $large = $medium*1.5;
+
   if (!empty($_REQUEST['tags'])) {
     $pieces = explode(",", $_REQUEST['tags']);
 
@@ -60,12 +64,26 @@
   foreach ($categoryOne_tag_ids as $categoryOne_tag_id) {
     $articlesExists = 0;
     $tagExists = 0;
+    $size = 0;
     $categoryOne_tag = $database->get("tags", [
       "id",
-      "name"
+      "name",
+      "count"
       ], [
       "id" => $categoryOne_tag_id
       ]);
+    if($categoryOne_tag['count'] < $small){
+      $size = 1;
+    }
+    elseif ($categoryOne_tag['count'] >= $small && $categoryOne_tag['count'] < $medium) {
+      $size = 2;
+    }
+    elseif ($categoryOne_tag['count'] >= $medium && $categoryOne_tag['count'] < $large) {
+      $size = 3;
+    }
+    else {
+      $size = 4;
+    }
     if (!empty($_REQUEST['tags'])){
     foreach($article_ids as $article_id){
       $exists = $database->select("article_tags", "tag_id", [
@@ -84,12 +102,12 @@
       }
     }
 
-    array_push($categoryOne_tags, ["id" => $categoryOne_tag["id"], "name" => $categoryOne_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists]);
+    array_push($categoryOne_tags, ["id" => $categoryOne_tag["id"], "name" => $categoryOne_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists, "size" => $size]);
     $articleExists = 0;
     $tagExists = 0;
   }
   else{
-    array_push($categoryOne_tags, ["id" => $categoryOne_tag["id"], "name" => $categoryOne_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
+    array_push($categoryOne_tags, ["id" => $categoryOne_tag["id"], "name" => $categoryOne_tag["name"], "articlesExists" => 1, "tagExists" => 0, "size" => $size]);
   }
 }
 
@@ -97,12 +115,28 @@
   foreach ($categoryTwo_tag_ids as $categoryTwo_tag_id) {
     $articlesExists = 0;
     $tagExists = 0;
+    $size = 0;
     $categoryTwo_tag = $database->get("tags", [
       "id",
-      "name"
+      "name",
+      "count"
       ], [
       "id" => $categoryTwo_tag_id
       ]);
+
+    if($categoryTwo_tag['count'] < $small){
+      $size = 1;
+    }
+    elseif ($categoryTwo_tag['count'] >= $small && $categoryTwo_tag['count'] < $medium) {
+      $size = 2;
+    }
+    elseif ($categoryTwo_tag['count'] >= $medium && $categoryTwo_tag['count'] < $large) {
+      $size = 3;
+    }
+    else {
+      $size = 4;
+    }
+
     if (!empty($_REQUEST['tags'])){
     foreach($article_ids as $article_id){
       $exists = $database->select("article_tags", "tag_id", [
@@ -121,11 +155,11 @@
       }
     }
 
-    array_push($categoryTwo_tags, ["id" => $categoryTwo_tag["id"], "name" => $categoryTwo_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists]);
+    array_push($categoryTwo_tags, ["id" => $categoryTwo_tag["id"], "name" => $categoryTwo_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists, "size" => $size]);
     $articleExists = 0;
     $tagExists = 0;
   }else{
-    array_push($categoryTwo_tags, ["id" => $categoryTwo_tag["id"], "name" => $categoryTwo_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
+    array_push($categoryTwo_tags, ["id" => $categoryTwo_tag["id"], "name" => $categoryTwo_tag["name"], "articlesExists" => 1, "tagExists" => 0, "size" => $size]);
   }
   }
 
@@ -133,12 +167,28 @@
   foreach ($categoryThree_tag_ids as $categoryThree_tag_id) {
     $articlesExists = 0;
     $tagExists = 0;
+    $size = 0;
     $categoryThree_tag = $database->get("tags", [
       "id",
-      "name"
+      "name",
+      "count"
       ], [
       "id" => $categoryThree_tag_id
       ]);
+
+    if($categoryThree_tag['count'] < $small){
+      $size = 1;
+    }
+    elseif ($categoryThree_tag['count'] >= $small && $categoryThree_tag['count'] < $medium) {
+      $size = 2;
+    }
+    elseif ($categoryThree_tag['count'] >= $medium && $categoryThree_tag['count'] < $large) {
+      $size = 3;
+    }
+    else {
+      $size = 4;
+    }
+
     if (!empty($_REQUEST['tags'])){
     foreach($article_ids as $article_id){
       $exists = $database->select("article_tags", "tag_id", [
@@ -157,11 +207,11 @@
       }
     }
 
-    array_push($categoryThree_tags, ["id" => $categoryThree_tag["id"], "name" => $categoryThree_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists]);
+    array_push($categoryThree_tags, ["id" => $categoryThree_tag["id"], "name" => $categoryThree_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists, "size" => $size]);
     $articleExists = 0;
     $tagExists = 0;
   }else{
-    array_push($categoryThree_tags, ["id" => $categoryThree_tag["id"], "name" => $categoryThree_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
+    array_push($categoryThree_tags, ["id" => $categoryThree_tag["id"], "name" => $categoryThree_tag["name"], "articlesExists" => 1, "tagExists" => 0, "size" => $size]);
   }
   }
 

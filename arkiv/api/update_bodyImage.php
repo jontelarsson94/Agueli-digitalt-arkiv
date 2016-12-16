@@ -3,8 +3,8 @@
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
 //Arrays
-$errors = array();
-$data = array();
+/*$errors = array();
+$data = array();*/
 $article_id = $_REQUEST['article_id'];
 $index = $_REQUEST['index'];
 

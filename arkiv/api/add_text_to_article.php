@@ -1,6 +1,8 @@
 <?php 
 require_once "../inc/db_credentials.php";
 
+$data = array();
+
 $article_id = $_REQUEST['article_id'];
 $index = $_REQUEST['index'];
 $emptystring = "";
@@ -11,6 +13,10 @@ $emptystring = "";
     "article_id" => $article_id
   ]);
 
-echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+$data['success'] = true;
+
+echo json_encode($data);
+
+//echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
 
  ?>

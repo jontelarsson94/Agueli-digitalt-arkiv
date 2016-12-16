@@ -10,10 +10,16 @@
   $char = $_REQUEST['char'];
   $char_tag_ids = $database->select("tags", [
     "id",
-    "name"
+    "name",
+    "count"
     ], [
     "name[~]" => [$char . "%", strtolower($char) . "%"]
   ]);
+
+  $medium = $database->avg("tags", "count");
+  $small = $medium*0.5;
+  $large = $medium*1.5;
+
 
 
   if (!empty($_REQUEST['tags'])) {
@@ -56,12 +62,28 @@
   foreach ($char_tag_ids as $char_tag_id) {
     $articlesExists = 0;
     $tagExists = 0;
+    $size = 0;
     $char_tag = $database->get("tags", [
       "id",
-      "name"
+      "name",
+      "count"
       ], [
       "id" => $char_tag_id['id']
       ]);
+
+    if($char_tag['count'] < $small){
+      $size = 1;
+    }
+    elseif ($char_tag['count'] >= $small && $char_tag['count'] < $medium) {
+      $size = 2;
+    }
+    elseif ($char_tag['count'] >= $medium && $char_tag['count'] < $large) {
+      $size = 3;
+    }
+    else {
+      $size = 4;
+    }
+
     if (!empty($_REQUEST['tags'])){
     foreach($article_ids as $article_id){
       $exists = $database->select("article_tags", "tag_id", [
@@ -79,13 +101,12 @@
         $tagExists = 1;
       }
     }
-
-    array_push($char_tags, ["id" => $char_tag["id"], "name" => $char_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists]);
+    array_push($char_tags, ["id" => $char_tag["id"], "name" => $char_tag["name"], "articlesExists" => $articlesExists, "tagExists" => $tagExists, "size" => $size]);
     $articleExists = 0;
     $tagExists = 0;
   }
   else{
-    array_push($char_tags, ["id" => $char_tag["id"], "name" => $char_tag["name"], "articlesExists" => 1, "tagExists" => 0]);
+    array_push($char_tags, ["id" => $char_tag["id"], "name" => $char_tag["name"], "articlesExists" => 1, "tagExists" => 0, "size" => $size]);
   }
 }
 
@@ -96,7 +117,20 @@
   }else{
     $char_tags = array();
     foreach ($char_tag_ids as $char_tag_id) {
-      array_push($char_tags, ["id" => $char_tag_id["id"], "name" => $char_tag_id["name"], "articlesExists" => 1, "tagExists" => 0]);
+      $size = 0;
+      if($char_tag_id['count'] < $small){
+        $size = 1;
+      }
+      elseif ($char_tag_id['count'] >= $small && $char_tag_id['count'] < $medium) {
+        $size = 2;
+      }
+      elseif ($char_tag_id['count'] >= $medium && $char_tag_id['count'] < $large) {
+        $size = 3;
+      }
+      else {
+        $size = 4;
+      }
+      array_push($char_tags, ["id" => $char_tag_id["id"], "name" => $char_tag_id["name"], "articlesExists" => 1, "tagExists" => 0, "size" => $size]);
     }
     $data['char_tags'] = $char_tags;
     $data['tags'] = [];

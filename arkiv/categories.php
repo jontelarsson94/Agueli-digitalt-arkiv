@@ -38,11 +38,12 @@
         <li ng-repeat="tag in category_tags" class="list-group-item col-md-2"><a>{{tag.name}}</a><span ng-click="removeTagForCategory(tag.id, category_id)" class="glyphicon glyphicon-remove pull-right fake-button ag-red"></span></li>
       </ul>
       </div>
-      <div class="row col-md-12" ng-if="category_id != -1">
+      <div ng-if="category_id != -1" class="row col-md-12">
       <br><br>
         <form class="col-md-4 col-md-offset-4" role="form" ng-submit="addTagForCategory();" class="form-inline">
           <input type="text" class="form-control" placeholder="Tag name" name="tag" id="tag" ng-model="tagData.tag">
           <button type="submit" class="btn btn-default">Add tag</button>
+          {{message}}
         </form>
       </div>
 
