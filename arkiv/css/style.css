@@ -261,6 +261,10 @@ span:hover{
   color: blue;
 }
 
+.ag-text-left{
+  text-align: left;
+}
+
 .ag-small-img{
   width:50%;
 }
@@ -269,4 +273,8 @@ span:hover{
   border-style: solid;
   border-color: black;
   padding: 2em;
+}
+
+.ag-tag-padding{
+  padding: 0.5em;
 }
