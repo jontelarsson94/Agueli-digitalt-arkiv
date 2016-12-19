@@ -40,13 +40,9 @@
         </div>
         <div class="col-md-2">
           <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Senast lästa</button>
-          <h4 class="ag-yellow">Innehållsrikaste taggarna:</h4>
+          <h4 class="ag-yellow">Föreslagna taggar:</h4>
           <span ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': popular_tag.size == 1 , 'fake-button ag-sm ag-white tag': popular_tag.size == 2,
               'fake-button ag-md ag-white tag': popular_tag.size == 3, 'fake-button ag-lg ag-white tag': popular_tag.size == 4 } " ng-click="addClickForTag(popular_tag.tag.id); addOneTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}} </span>
-              <br><br><br><br><br><br><br>
-          <h4 class="ag-yellow">Populäraste taggarna:</h4>
-          <span ng-repeat="random_tag in random_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': random_tag.size == 1 , 'fake-button ag-sm ag-white tag': random_tag.size == 2,
-              'fake-button ag-md ag-white tag': random_tag.size == 3, 'fake-button ag-lg ag-white tag': random_tag.size == 4 } " ng-click="addClickForTag(random_tag.tag.id); addOneTagToSearch(random_tag.tag.id); getFilteredArticles()">{{random_tag.tag.name}} </span>
         </div>
       </div>
     </div>
