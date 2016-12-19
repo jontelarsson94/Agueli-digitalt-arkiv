@@ -1,4 +1,4 @@
-angular.module('article', []).controller('articleCtrl', function($scope, $http) {
+angular.module('article', []).controller('articleCtrl', function($scope, $http, $location, $anchorScroll) {
   /*For post request we need to have an array with data like the variables below
   and then ng-model in html to be able to send the data with "data" in angular
   http method*/
@@ -11,6 +11,15 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http) 
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
   $scope.currentChar = "";
+
+  $scope.gotoTop = function() {
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('top');
+
+      // call $anchorScroll()
+      $anchorScroll();
+    };
 
   $scope.getArticles = function (){
     $scope.isSelection = 0;
