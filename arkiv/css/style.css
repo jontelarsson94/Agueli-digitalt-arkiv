@@ -246,7 +246,7 @@ object-position: center;  //Center the image within the element
 }
 
 .ag-stroke{
-  text-decoration: line-through;
+  color: #999999;
 }
 
 .ag-line-list li{

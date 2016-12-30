@@ -19,10 +19,7 @@
     <div>
         <div class="col-md-8">
         <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
-        <span class="ag-padding"></span>
-        </div>
-        <div class="col-md-4">
-        <button data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill ag-padding glyphicon glyphicon-plus fake-button">Tagg</button>
+        <button ng-if="filterTags.length > 0" data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill">Tagg<span class="glyphicon glyphicon-plus pull-left"></span></button>
         </div>
         <br><br>
     </div>

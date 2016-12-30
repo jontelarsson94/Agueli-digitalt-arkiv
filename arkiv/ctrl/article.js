@@ -189,7 +189,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
 
   $scope.getTagsForChar = function (categoryOne, categoryTwo, categoryThree){
     if($scope.currentChar != ""){
-    //alert("api/get_tags_for_char.php?char=" + char + "&categoryOne_id=" + categoryOne + "&categoryTwo_id=" + categoryTwo + "&categoryThree_id=" + categoryThree + "&tags="+$scope.tagString)
+    alert("api/get_tags_for_char.php?char=" + char + "&categoryOne_id=" + categoryOne + "&categoryTwo_id=" + categoryTwo + "&categoryThree_id=" + categoryThree + "&tags="+$scope.tagString)
     $http.get("api/get_tags_for_char.php?char=" + $scope.currentChar + "&categoryOne_id=" + categoryOne + "&categoryTwo_id=" + categoryTwo + "&categoryThree_id=" + categoryThree + "&tags="+$scope.tagString)
     .success(function (response) {
       if(response.success == true){
