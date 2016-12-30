@@ -240,6 +240,9 @@ object-position: center;  //Center the image within the element
 .ag-padding-bottom{
   padding-bottom: 2em;
 }
+.ag-padding-left{
+  margin-left: 2em;
+}
 
 .ag-padding-top{
   margin-bottom: 1em;

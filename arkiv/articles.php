@@ -232,7 +232,7 @@
           </div>
           <div class="col-md-12">
           <div class="col-md-4">
-            <span ng-repeat="char_tag in char_tags | orderBy : 'tag.name'" class="fake-button ag-white" ng-click="gotoTop(); addClickForTag(char_tag.id); addTagToSearch(char_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-class="{'ag-xs': char_tag.size == 1 , 'ag-sm': char_tag.size == 2, 'ag-md': char_tag.size == 3, 'ag-lg': char_tag.size == 4 }"><span ng-if="char_tag.articlesExists==1 && char_tag.tagExists==0">{{char_tag.name}}&nbsp; </span> <span ng-if="char_tag.tagExists==1" class="ag-yellow">{{char_tag.name}}&nbsp; </span> <span ng-if="categoryThree_tag.articlesExists==0 && char_tag.tagExists!=1" class="ag-stroke">{{char_tag.name}}&nbsp; </span></span></span>
+            <span ng-repeat="char_tag in char_tags | orderBy : 'tag.name'" class="fake-button ag-white" ng-click="gotoTop(); addClickForTag(char_tag.id); addTagToSearch(char_tag.id); getFilterTags(categoryOne.id, categoryTwo.id, categoryThree.id); getTagsForChar(categoryOne.id, categoryTwo.id, categoryThree.id)"><span ng-class="{'ag-xs': char_tag.size == 1 , 'ag-sm': char_tag.size == 2, 'ag-md': char_tag.size == 3, 'ag-lg': char_tag.size == 4 }"><span ng-if="char_tag.articlesExists==1 && char_tag.tagExists==0">{{char_tag.name}}&nbsp; </span> <span ng-if="char_tag.tagExists==1" class="ag-yellow">{{char_tag.name}}&nbsp; </span> <span ng-if="char_tag.articlesExists==0 && char_tag.tagExists!=1" class="ag-stroke">{{char_tag.name}}&nbsp; </span></span></span>
           </div>
           </div>
           </div>

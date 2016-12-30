@@ -137,6 +137,10 @@
     <div class="row col-md-12">
     <br>
       <a href="articles.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Updating Article</button></a>
+      <form action="api/delete_article.php" method="post">
+        <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
+        <button type="submit" class="ag-padding-left btn btn-danger">Radera Artikel</button>
+      </form>
     </div>
     </div>
 
