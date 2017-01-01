@@ -62,18 +62,6 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
     $scope.tagData.push(id);
     //alert($scope.tagData);
   }
-
-  $scope.addTagToSearchByName = function (name){
-    alert("hejsan");
-    $http.get("api/get_tag_by_name.php?name=" + name)
-    .success(function (response) {
-      if(response.success == true){
-        $scope.id = response.result;
-        $scope.addOneTagToSearch($scope.id[0].id);
-      }else {
-      }
-    });
-  }
    
 
   $scope.addOneTagToSearch = function (id){
@@ -81,6 +69,20 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
     $scope.tagData = [];
     $scope.tagData.push(id);
     //alert($scope.tagData);
+  }
+
+  $scope.addTagToSearchByName = function (name){
+    alert("hejsan");
+    $http.get("api/get_tag_by_name.php?name=" + name)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.id = response.result;
+        $scope.tagData = [];
+        $scope.tagData.push($scope.id[0].id);
+        $scope.getFilteredArticles();
+      }else {
+      }
+    });
   }
 
   $scope.addTagToSearchFromText = function (id){
