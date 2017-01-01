@@ -64,6 +64,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
   }
 
   $scope.addTagToSearchByName = function (name){
+    alert("hejsan");
     $http.get("api/get_tag_by_name.php?name=" + name)
     .success(function (response) {
       if(response.success == true){
@@ -120,6 +121,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
 
 //should use a $scope.filter for if the user has pressed article, painting or letter
   $scope.getFilteredArticles = function (){
+    alert("filtered");
       $scope.tagString = ""
       for(var i=0;i<$scope.tagData.length;i++) {
         $scope.tagString = $scope.tagString + "," + $scope.tagData[i];
