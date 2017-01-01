@@ -63,6 +63,18 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
     //alert($scope.tagData);
   }
 
+  $scope.addTagToSearchByName = function (name){
+    $http.get("api/get_tag_by_name.php?name=" + name)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.id = response.result;
+        $scope.addOneTagToSearch($scope.id[0].id);
+      }else {
+      }
+    });
+  }
+   
+
   $scope.addOneTagToSearch = function (id){
     //$scope.tagData = $scope.tagData + "," + id;
     $scope.tagData = [];
