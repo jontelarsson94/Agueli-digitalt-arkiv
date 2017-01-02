@@ -287,3 +287,8 @@ span:hover{
 .ag-tag-padding{
   padding: 0.5em;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
