@@ -12,12 +12,15 @@ $article_id = $_REQUEST['article_id'];
 $index = $_REQUEST['index'];
 
 //Check conditions/Validation
-$body = $_REQUEST['XSRF-TOKEN'];//$_REQUEST['body'][$index];
+$body = $_REQUEST['body'][$index];
 
   $database->update("article_texts", [
     "body" => $body
   ], [
-   "section" => $index+1
+  	"AND" =>[
+  	"article_id" => $article_id,
+    "section" => $index+1
+  	]
   ]);
 
 echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
