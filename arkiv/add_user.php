@@ -8,7 +8,7 @@
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
-    <script src="ctrl/login.js"></script>
+    <script src="ctrl/admin.js"></script>
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body id="dynamicBody" ng-app="admin" ng-controller="adminCtrl">

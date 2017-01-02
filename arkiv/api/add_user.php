@@ -41,5 +41,6 @@ if(isset($_POST['email']) && isset($_POST['password1']) && isset($_POST['passwor
 
       echo '<script type="text/javascript">window.location = "../articles.php"</script>';
 }
+}
 
  ?>
