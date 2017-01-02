@@ -1,4 +1,7 @@
 <?php
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
 
 function UploadFile($fileToUpload, $database, $index){
 
@@ -91,5 +94,6 @@ function UploadSingleFile($fileToUpload, $database){
           echo "Sorry, there was an error uploading your file.";
       }
   }
+}
 }
 ?>

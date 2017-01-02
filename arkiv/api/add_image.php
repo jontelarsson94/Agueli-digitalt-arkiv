@@ -1,4 +1,8 @@
 <?php
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
+
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
 if(empty($_FILES['fileToUpload']['name'])){
@@ -25,4 +29,5 @@ if(!empty($_POST['fileToUpload'])){
     "section" => 1
   ]);
 }*/
+}
  ?>

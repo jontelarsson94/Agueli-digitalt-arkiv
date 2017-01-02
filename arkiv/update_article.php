@@ -10,7 +10,9 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/add_article.js"></script>
   </head>
+  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="add_article" ng-controller="add_articleCtrl" ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>" ng-cloak>
+  <?php require_once 'inc/navbar.php'; ?>
 
 
 

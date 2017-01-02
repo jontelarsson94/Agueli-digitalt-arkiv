@@ -1,5 +1,9 @@
 <?php
   //DB login
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
+
   require_once "../inc/db_credentials.php";
   //Arrays
   $errors = array();
@@ -38,4 +42,5 @@
   }
   //Return data
   echo json_encode($data);
+}
 ?>

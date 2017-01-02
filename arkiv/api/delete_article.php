@@ -1,4 +1,8 @@
 <?php 
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
+
 require_once "../inc/db_credentials.php";
 
 $data = array();
@@ -22,5 +26,7 @@ $article_id = $_REQUEST['article_id'];
 	]);
 
 echo '<script type="text/javascript">window.location = "../articles.php"</script>';
+
+}
 
  ?>

@@ -1,4 +1,9 @@
 <?php
+
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
+
   //DB login
   require_once "../inc/db_credentials.php";
   //Arrays
@@ -22,4 +27,5 @@
   $data['success'] = true;
   //Return data
   echo json_encode($data);
+}
 ?>

@@ -12,7 +12,7 @@
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body id="dynamicBody" ng-app="admin" ng-controller="adminCtrl">
-    <?php //require_once 'inc/navbar.php'; ?>
+    <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid">
   <div class="col-md-8 col-md-offset-2">
         <h3>Lägg till användare</h3>

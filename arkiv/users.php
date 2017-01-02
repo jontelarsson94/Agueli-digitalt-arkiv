@@ -11,23 +11,13 @@
     <script src="ctrl/login.js"></script>
   </head>
   <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
-  <body id="dynamicBody" ng-app="login" ng-controller="loginCtrl">
+  <body id="dynamicBody" ng-app="admin" ng-controller="adminCtrl">
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid">
   <div class="col-md-8 col-md-offset-2">
-        <h3>Logga in</h3>
-        <div class="form-group">
-          <form action="api/try_login.php" method="post">
-              <label for="email">Email:</label>
-              <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-              <br>
-              <label for="password">Lösenord:</label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Lösenord">
-              <br><br>
-              <div class="col-md-4 col-md-offset-4">
-                <button type="submit" class="col-md-12 btn btn-primary">Logga in</button>
-              </div>
-          </form>
+        <h3>Användare</h3>
+        <div class="col-md-12">
+          
         </div>
   </div>
 </div>

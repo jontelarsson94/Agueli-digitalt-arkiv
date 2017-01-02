@@ -1,4 +1,7 @@
 <?php
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
 
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
@@ -137,4 +140,5 @@ echo json_encode($data);*/
 
 echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $articleId . '"</script>';
 
+}
  ?>

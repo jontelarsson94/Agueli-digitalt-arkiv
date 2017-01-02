@@ -1,6 +1,7 @@
 <?php
 
 require_once "../inc/db_credentials.php";
+session_start();
 //Arrays
 $errors = array();
 $data = array();

@@ -1,4 +1,9 @@
 <?php
+
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() == "admin"){
+
 require_once "../inc/db_credentials.php";
 //Arrays
 $errors = array();

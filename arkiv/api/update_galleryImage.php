@@ -1,5 +1,9 @@
 <?php
 
+require_once "../inc/check_admin.php";
+
+if(checkAdmin() != "nothing"){
+
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
 //Arrays
@@ -40,5 +44,7 @@ else{
 }
 
 echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $article_id . '"</script>';
+
+}
 
  ?>
