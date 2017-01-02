@@ -6,6 +6,8 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
   $scope.tagData = {};
   $scope.categoryData = {};
 
+  alert(document.cookie);
+
   $scope.getCategories = function (){
     $http.get("api/get_categories.php")
     .success(function (response) {

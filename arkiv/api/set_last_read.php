@@ -1,4 +1,5 @@
 <?php
+
 require_once "../inc/db_credentials.php";
 //Arrays
 $errors = array();

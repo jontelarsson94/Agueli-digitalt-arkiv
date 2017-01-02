@@ -1,5 +1,6 @@
 
 <?php
+
   //print_r($_GET);
   require_once "../inc/db_credentials.php";
   $data = array();

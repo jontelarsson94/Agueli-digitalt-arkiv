@@ -1,4 +1,5 @@
 <?php
+
   //DB login
   require_once "../inc/db_credentials.php";
   //Arrays

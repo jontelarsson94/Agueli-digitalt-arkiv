@@ -1,8 +1,9 @@
 <?php
+
   //DB login
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing"){
+if(checkAdmin() != "nothing" && $_REQUEST['XSRF-TOKEN'] == "hejsan"){
 
 
   require_once "../inc/db_credentials.php";

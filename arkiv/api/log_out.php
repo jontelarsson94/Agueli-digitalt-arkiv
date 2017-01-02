@@ -1,5 +1,6 @@
 <?PHP
 
+
 require_once "../inc/check_admin.php";
 
 if(checkAdmin() != "nothing"){

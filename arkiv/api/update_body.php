@@ -2,7 +2,7 @@
 
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing"){
+if(checkAdmin() != "nothing" && $_REQUEST['XSRF-TOKEN'] == $_COOKIE['XSRF-TOKEN']){
 
 require_once "../inc/db_credentials.php";
 //Arrays
@@ -12,7 +12,7 @@ $article_id = $_REQUEST['article_id'];
 $index = $_REQUEST['index'];
 
 //Check conditions/Validation
-$body = $_REQUEST['body'][$index];
+$body = $_REQUEST['XSRF-TOKEN'];//$_REQUEST['body'][$index];
 
   $database->update("article_texts", [
     "body" => $body

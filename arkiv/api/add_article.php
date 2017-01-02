@@ -1,7 +1,8 @@
 <?php
+
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing"){
+if(checkAdmin() != "nothing" && $_REQUEST['XSRF-TOKEN'] == $_COOKIE['XSRF-TOKEN']){
 
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
@@ -59,6 +60,17 @@ if(!empty($_POST['tags']))
 if(!empty($_FILES['cardImage']['name'])){
   $fileId = UploadSingleFile("cardImage", $database);
 
+  $database->insert("article_images", [
+    "image_id" => $fileId,
+    "article_id" => $articleId,
+    "section" => -1,
+    "isCardImage" => 1
+  ]);
+}else{
+  $fileId = $database->insert("images", [
+    "url" => NULL
+  ]);
+  
   $database->insert("article_images", [
     "image_id" => $fileId,
     "article_id" => $articleId,

@@ -1,4 +1,5 @@
 <?php
+
 require_once "../inc/db_credentials.php";
 
 $result = $database->select('articles', [

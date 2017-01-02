@@ -28,6 +28,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
     if($hash == $db_password['password']){
       $_SESSION['logged_in'] = true;
       $_SESSION['admin'] = false;
+      $cookie_name = "XSRF-TOKEN";
+      $token = base64_encode( openssl_random_pseudo_bytes(32));
+      $cookie_value = $token;
+
+      setcookie($cookie_name, $cookie_value, time() + (86400 * 1), "/");
       $admin = $database->get("users", [
         "admin"
         ], [
