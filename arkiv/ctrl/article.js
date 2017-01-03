@@ -1,4 +1,4 @@
-angular.module('article', []).controller('articleCtrl', function($scope, $http, $location, $anchorScroll) {
+angular.module('article', ['rzModule']).controller('articleCtrl', function($scope, $http, $location, $anchorScroll) {
   /*For post request we need to have an array with data like the variables below
   and then ng-model in html to be able to send the data with "data" in angular
   http method*/
@@ -11,6 +11,7 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
   $scope.currentChar = "";
+  $scope.timeline = false;
 
   $scope.gotoTop = function() {
       // set the location.hash to the id of
@@ -43,6 +44,67 @@ angular.module('article', []).controller('articleCtrl', function($scope, $http, 
       }
     });
   }
+
+  $scope.getSlider = function (){
+    $http.get("api/get_slider_years.php")
+    .success(function (response) {
+      if(response.success == true){
+        $scope.timeline = true;
+        $scope.tagData = [];
+        $scope.years = response.years;
+        $scope.slider = {
+          min: $scope.years[0].min,
+          max: $scope.years[0].max,
+          options: {
+            floor: $scope.years[0].min,
+            ceil: $scope.years[0].max,
+            noSwitching: true
+          }
+        };
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.hideSlider = function() {
+      if($scope.timeline){
+        $scope.timeline = false;
+        $scope.tagData = [];
+        $scope.filterTags = [];
+        $scope.getArticles();
+      }else{
+        $scope.tagData = [];
+        $scope.filterTags = [];
+        $scope.getArticles();
+      }
+    };
+
+  $scope.getArticlesBetweenYears = function (min, max){
+    $http.get("api/get_articles_between_years.php?min=" + min + "&max=" + max)
+    .success(function (response) {
+      if(response.success == true){
+        $scope.page = 9;
+        $scope.maxArticles = response.result.length;
+        if($scope.page >= $scope.maxArticles){
+          $scope.showScrollButton = 0;
+        }
+        $scope.articles = response.result;
+        $scope.main_images = response.main_images;
+        $scope.articles_starred = response.result_starred;
+        $scope.main_images_starred = response.main_images_starred;
+        $scope.articles_lastRead = response.result_lastRead;
+        $scope.main_images_lastRead = response.main_images_lastRead;
+        $scope.articles_message = response.message;
+      }else {
+        $scope.articles_error = response.error;
+      }
+    });
+  }
+
+  $scope.$on("slideEnded", function() {
+     $scope.getArticlesBetweenYears($scope.slider.min, $scope.slider.max);
+  });
 
   $scope.getArticlesAdmin = function (){
     $scope.isSelection = 0;

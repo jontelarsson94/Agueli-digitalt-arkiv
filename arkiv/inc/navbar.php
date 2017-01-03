@@ -8,17 +8,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="articles.php"><h3 class="ag-h3"><span class="glyphicon"></span>Digitalt Arkiv</h3></a>
+      <a ng-click="hideSlider()" class="navbar-brand" href="articles.php"><h3 class="ag-h3"><span class="glyphicon"></span>Digitalt Arkiv</h3></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       <?php if(basename($_SERVER['PHP_SELF']) == "articles.php"){ ?>
-        <li <? if($nav_current_page=="articles.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Tidningsartikel');"><h3 class="ag-h3">Tidningsartiklar</h3></a></li>
-        <li <? if($nav_current_page=="paintings.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Målning');"><h3 class="ag-h3">Målningar</h3></a></li>
-        <li <? if($nav_current_page=="letters.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Brev');"><h3 class="ag-h3">Brev</h3></a></li>
-        <li <? if($nav_current_page=="letters.php") echo 'class="active "' ?>><a href="#" data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()"><h3 class="ag-h3">Taggar</h3></a></li>
+        <li <? if($nav_current_page=="articles.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Tidningsartikel'); hideSlider()"><h3 class="ag-h3">Tidningsartiklar</h3></a></li>
+        <li <? if($nav_current_page=="paintings.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Målning'); hideSlider()"><h3 class="ag-h3">Målningar</h3></a></li>
+        <li <? if($nav_current_page=="letters.php") echo 'class="active "' ?>><a href="#" ng-click="addTagToSearchByName('Brev'); hideSlider()"><h3 class="ag-h3">Brev</h3></a></li>
+        <li <? if($nav_current_page=="letters.php") echo 'class="active "' ?>><a href="#" data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal(); hideSlider()"><h3 class="ag-h3">Taggar</h3></a></li>
+        <li <? if($nav_current_page=="letters.php") echo 'class="active "' ?>><a href="#" ng-click="getSlider()"><h3 class="ag-h3">Tidslinje</h3></a></li>
        <?php } ?>
 
         <?php session_start(); if($_SESSION['logged_in'] == true){ ?>

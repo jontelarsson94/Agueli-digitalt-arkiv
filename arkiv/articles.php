@@ -6,10 +6,12 @@
     <title>Add article</title>
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/rzslider.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.min.js"></script>
-    <script src="lib/js/jquery.min.js"></script>
+    <script src="lib/js/rzslider.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
@@ -18,7 +20,14 @@
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid">
   <div class="col-md-4 col-md-offset-4">
-    <div>
+  <div ng-if="timeline" class="ag-white-bg ag-tag-padding" ng-init="getSlider()">
+    <rzslider
+      rz-slider-model="slider.min"
+      rz-slider-high="slider.max"
+      rz-slider-options="slider.options">
+    </rzslider>
+  </div>
+    <div ng-if="!timeline">
         <div class="col-md-8">
         <button ng-repeat="filterTag in filterTags" ng-click="removeTagToSearch(filterTag.id); getFilteredArticles()" class="skill">{{filterTag.name}} <span class="glyphicon fake-button glyphicon-remove"></span></button>
         <button ng-if="filterTags.length > 0" data-target="#tagModal" data-toggle="modal" ng-click="getTagsForModal()" class="skill">Tagg<span class="glyphicon glyphicon-plus pull-left"></span></button>
@@ -39,8 +48,8 @@
         </div>
         <div class="col-md-2">
           <button ng-if="lastReadId != 0" data-toggle="modal" data-target="#myModal" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Senast lästa</button>
-          <h4 class="ag-yellow">Föreslagna taggar:</h4>
-          <span name="tag" ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': popular_tag.size == 1 , 'fake-button ag-sm ag-white tag': popular_tag.size == 2,
+          <h4 ng-if="!timeline" class="ag-yellow">Föreslagna taggar:</h4>
+          <span ng-if="!timeline" name="tag" ng-repeat="popular_tag in popular_tags | orderBy : 'tag.name'" ng-class="{'fake-button ag-xs ag-white tag': popular_tag.size == 1 , 'fake-button ag-sm ag-white tag': popular_tag.size == 2,
               'fake-button ag-md ag-white tag': popular_tag.size == 3, 'fake-button ag-lg ag-white tag': popular_tag.size == 4 } " ng-click="gotoTop(); addClickForTag(popular_tag.tag.id); addOneTagToSearch(popular_tag.tag.id); getFilteredArticles()">{{popular_tag.tag.name}} </span>
         </div>
       </div>
