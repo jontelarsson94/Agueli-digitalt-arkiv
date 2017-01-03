@@ -1,4 +1,10 @@
+<?php
+require_once "inc/check_admin.php";
 
+if(checkAdmin() != "nothing"){
+  echo '<script type="text/javascript">window.location = "articles.php"</script>';
+}
+?>
 
 <html>
   <head>
