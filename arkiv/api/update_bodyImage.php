@@ -2,7 +2,7 @@
 
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing" && $_REQUEST['XSRF-TOKEN'] == $_COOKIE['XSRF-TOKEN']){
+if(checkAdmin() != "nothing"){
 
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";

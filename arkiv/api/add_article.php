@@ -2,7 +2,7 @@
 
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing" && $_REQUEST['XSRF-TOKEN'] == $_COOKIE['XSRF-TOKEN']){
+if(checkAdmin() != "nothing"){
 
 require_once "../inc/db_credentials.php";
 require_once "add_photo.php";
@@ -138,19 +138,11 @@ if(isset($_POST['body'][0])){
 //testa att lägga till tom om $_POST[body][0] är tom eller vad som händer med isset
 
 //Set return statement
-/*if (!empty($errors)) {
-  $data['success'] = false;
-  $data['errors']  = $errors;
-} else {
-  $data['success'] = true;
-  $data['message'] = 'Article added successfully!';
-  $data['result'] = $result;
-}
-//Return data
-//here we should show the article
-echo json_encode($data);*/
+
 
 echo '<script type="text/javascript">window.location = "../update_article.php?article_id=' . $articleId . '"</script>';
 
 }
+//}
  ?>
+

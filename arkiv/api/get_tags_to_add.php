@@ -4,7 +4,7 @@
   
   require_once "../inc/check_admin.php";
 
-if(checkAdmin() != "nothing"){
+if(checkAdmin() != "nothing" && $_SERVER['HTTP_X_XSRF_TOKEN'] == $_COOKIE['XSRF-TOKEN']){
 
   require_once "../inc/db_credentials.php";
   //Arrays

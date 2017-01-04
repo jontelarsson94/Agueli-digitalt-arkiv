@@ -2,7 +2,7 @@
 
 require_once "../inc/check_admin.php";
 
-  if(checkAdmin() == "admin" && $_REQUEST['XSRF-TOKEN'] == $_COOKIE['XSRF-TOKEN']){
+  if(checkAdmin() == "admin" && $_SERVER['HTTP_X_XSRF_TOKEN'] == $_COOKIE['XSRF-TOKEN']){
 
   //DB login
   require_once "../inc/db_credentials.php";

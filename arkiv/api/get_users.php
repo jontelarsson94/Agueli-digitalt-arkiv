@@ -3,7 +3,7 @@
   //DB login
 require_once "../inc/check_admin.php";
 
-if(checkAdmin() == "admin"){
+if(checkAdmin() == "admin" && $_SERVER['HTTP_X_XSRF_TOKEN'] == $_COOKIE['XSRF-TOKEN']){
   require_once "../inc/db_credentials.php";
   //Arrays
   $errors = array();

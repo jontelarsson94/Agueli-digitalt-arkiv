@@ -27,7 +27,7 @@ $article_id = $_REQUEST['article_id'];
 		"id" => $article_id
 	]);
 
-echo '<script type="text/javascript">window.location = "../articles.php"</script>';
+echo '<script type="text/javascript">window.location = "../articles_admin.php"</script>';
 
 }
 
