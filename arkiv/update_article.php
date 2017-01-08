@@ -45,6 +45,7 @@
                   <label>Nuvarande bild på kortet</label>
                   <br><br>
                   <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
+                  <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
                     <label for="image1">Välj bild och klicka uppdatera för att uppdatera bilden på kortet</label>
                     <input class="form-control" type="file" name="cardImage" id="cardImage">
                     <button type="submit" class="btn btn-primary">Uppdatera bilden på kortet</button><br><br><br>
@@ -56,6 +57,7 @@
                   <form class="ag-update-border" action="api/update_body.php" method="post">
                   <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                   <input type="hidden" value="{{$index}}" name="index" id="index">
+                  <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
                     <label for="body[{{$index}}]">Ändra text och klicka uppdatera för att uppdatera texten för sektion {{$index+1}}</label>
                       <textarea class="form-control" rows="4" cols="25" name="body[{{$index}}]" id="body[{{$index}}]">{{body.body}}</textarea>
                       <button type="submit" class="btn btn-primary">Uppdatera text för sektion {{$index+1}}</button>
@@ -72,6 +74,7 @@
                   <h3>Bilder i text</h3>
                     <div ng-repeat="body_image in body_images">
                     <form class="ag-update-border" action="api/update_bodyImage.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                     <input type="hidden" value="{{$index}}" name="index" id="index">
                       <img class="img-thumbnail ag-small-img" src="img/{{body_image.url}}"></img>
@@ -93,6 +96,7 @@
                   <h3>Galleribilder:</h3>
                     <div ng-repeat="image in images">
                     <form class="ag-update-border" action="api/update_galleryImage.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
                     <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
                     <input type="hidden" value="{{$index}}" name="index" id="index">
                       <img class="img-thumbnail ag-small-img" src="img/{{image.url}}"></img>
@@ -141,7 +145,8 @@
     <div class="row col-md-12">
     <br>
       <a href="articles.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Updating Article</button></a>
-      <form action="api/delete_article.php" method="post">
+      <form id="deleteArticle" action="api/delete_article.php" method="post">
+        <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
         <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">
         <button type="submit" class="ag-padding-left btn btn-danger">Radera Artikel</button>
       </form>

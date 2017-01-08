@@ -21,6 +21,7 @@
         <div class="form-group">
         <br>
           <form action="api/add_user.php" method="post">
+              <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
               <label for="email">Email:</label>
               <input type="text" class="form-control" name="email" id="email" placeholder="Email">
               <br>

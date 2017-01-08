@@ -237,4 +237,14 @@ $(document).ready(function() {
         alert("You need to input a title!");
      }
     });
+
+    $( "#deleteArticle" ).submit(function( event ) {
+      
+        var r = confirm("Are you sure you want to delete this article?");
+        if (r == true) {
+        } else {
+          event.preventDefault();
+        }
+
+    });
 });

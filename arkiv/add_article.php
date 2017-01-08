@@ -20,6 +20,7 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
             <form action="api/add_article.php" id="add-article-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
                   <div class="form-group">
                     <label for="title">Titel</label>
                     <input type="text" class="form-control" name="title" id="title" ng-model="articleData.title">
