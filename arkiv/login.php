@@ -31,7 +31,11 @@ if(checkAdmin() != "nothing"){
               <br>
               <label for="password">Lösenord:</label>
               <input type="password" class="form-control" name="password" id="password" placeholder="Lösenord">
-              <br><br>
+              <br>
+              <?php if($_GET['failed'] == true){ ?>
+              <p>Your email or password was incorrect, try again.</p>
+              <?php }?>
+              <br>
               <div class="col-md-4 col-md-offset-4">
                 <button type="submit" class="col-md-12 btn btn-primary">Logga in</button>
               </div>

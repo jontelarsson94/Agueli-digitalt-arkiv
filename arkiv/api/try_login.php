@@ -45,7 +45,12 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 
       echo '<script type="text/javascript">window.location = "../articles.php"</script>';
     }
-  }
+    else{
+      echo '<script type="text/javascript">window.location = "../login.php?failed=true"</script>';
+    }
+  }else{
+      echo '<script type="text/javascript">window.location = "../login.php?failed=true"</script>';
+    }
 }
 
  ?>
