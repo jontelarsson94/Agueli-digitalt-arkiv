@@ -7,7 +7,7 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
   $scope.lastReadId = 0;
   $scope.tagData = [];
   $scope.tagDataString = ""
-  $scope.page = 9;
+  $scope.page = 12;
   $scope.maxArticles = 0;
   $scope.showScrollButton = 1;
   $scope.currentChar = "";
@@ -27,7 +27,7 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
     $http.get("api/get_articles.php")
     .success(function (response) {
       if(response.success == true){
-        $scope.page = 9;
+        $scope.page = 12;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
@@ -108,7 +108,7 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
     $http.get("api/get_articles_between_years.php?min=" + min + "&max=" + max)
     .success(function (response) {
       if(response.success == true){
-        $scope.page = 9;
+        $scope.page = 12;
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
@@ -184,7 +184,7 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
   }
 
   $scope.loadMore = function (){
-    $scope.page = $scope.page+9;
+    $scope.page = $scope.page+12;
     if($scope.page >= $scope.maxArticles){
       $scope.showScrollButton = 0;
     }

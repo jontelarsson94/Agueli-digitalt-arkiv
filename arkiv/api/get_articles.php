@@ -12,26 +12,32 @@
   }
 
   $articles_lastRead = $database->select("articles", [
-    "id",
-	   "title",
-     "summary"
+      "id",
+      "title",
+      "summary",
   ], [
     "id" => $lastReadId
   ]);
 
+  shuffle($articles_lastRead);
+
   $articles = array();
   //Get data from DB
   $articles_normal = $database->select("articles", [
-    "id",
-	   "title",
-     "summary"
+      "id",
+      "title",
+      "summary"
   ], array('AND' => array('star' => 0, "id[!]" => $lastReadId)));
 
+  shuffle($articles_normal);
+
   $articles_starred = $database->select("articles", [
-    "id",
-	   "title",
-     "summary"
+      "id",
+      "title",
+      "summary"
   ], array('AND' => array('star' => 1, "id[!]" => $lastReadId)));
+
+  shuffle($articles_starred);
 
   $main_images = array();
   $main_images_starred = array();
