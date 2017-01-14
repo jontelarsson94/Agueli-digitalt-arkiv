@@ -231,7 +231,7 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
       .success(function (response) {
         if(response.success == true){
           $scope.maxArticles = response.result.length;
-          $scope.page = response.page;
+          $scope.page = 12;
           if($scope.page >= $scope.maxArticles){
             $scope.showScrollButton = 0;
           }

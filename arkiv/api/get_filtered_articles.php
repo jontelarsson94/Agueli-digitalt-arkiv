@@ -38,11 +38,12 @@
     $article = $database->get("articles", [
 	      "id",
 	      "title",
-        "summary"
+        "summary",
+        "star"
     ], [
 	      "id" => $article_id["article_id"]
       ]);
-    array_push($articles, ["id" => $article['id'], "title" => $article['title'], "summary" => $article["summary"], "starred" => 0, "read" => 0]);
+    array_push($articles, ["id" => $article['id'], "title" => $article['title'], "summary" => $article["summary"], "starred" => $article['star'], "read" => 0]);
     //echo $article['title'];
     $main_image_id = $database->get("article_images", [
       "image_id"
@@ -63,7 +64,7 @@
   $data['result_starred'] = "";
   $data['result_lastRead'] = "";
   $data['tags'] = $tags;
-  $data['page'] = 9;
+  $data['page'] = 12;
   echo json_encode($data);
 }
 else{

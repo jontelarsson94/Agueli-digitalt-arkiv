@@ -7,7 +7,7 @@ if(checkAdmin() != "nothing"){
 function UploadFile($fileToUpload, $database, $index){
 
 $target_dir = "../img/";
-$target_basename = time() . "_" . rand(0,1000).".".pathinfo($_FILES[$fileToUpload]["name"][$index],PATHINFO_EXTENSION);
+$target_basename = rand(500, 2000) . time() . "_" . rand(0,1000).".".pathinfo($_FILES[$fileToUpload]["name"][$index],PATHINFO_EXTENSION);
 $target_file = $target_dir . $target_basename;
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -52,7 +52,7 @@ if (move_uploaded_file($_FILES[$fileToUpload]["tmp_name"][$index], $target_file)
 
 function UploadSingleFile($fileToUpload, $database){
   $target_dir = "../img/";
-  $target_basename = time() . "_" . rand(0,1000).".".pathinfo($_FILES[$fileToUpload]["name"], PATHINFO_EXTENSION);
+  $target_basename = rand(2000, 4000) . time() . "_" . rand(0,1000).".".pathinfo($_FILES[$fileToUpload]["name"], PATHINFO_EXTENSION);
   $target_file = $target_dir . $target_basename;
   echo $target_file . "\n";
   $uploadOk = 1;
