@@ -31,6 +31,9 @@
   $articles = array();
 
   $article_ids = $database->query($query)->fetchAll();
+
+  shuffle($article_ids);
+
   foreach($article_ids as $article_id){
     $article = $database->get("articles", [
 	      "id",

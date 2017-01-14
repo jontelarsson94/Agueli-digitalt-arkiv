@@ -12,6 +12,9 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
   $scope.showScrollButton = 1;
   $scope.currentChar = "";
   $scope.timeline = false;
+  $scope.articleId = 0;
+  $scope.malningId = 0;
+  $scope.brevId = 0;
 
   $scope.gotoTop = function() {
       // set the location.hash to the id of
@@ -20,7 +23,19 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
 
       // call $anchorScroll()
       $anchorScroll();
-    };
+  };
+
+    $scope.getIds = function (name){
+        $http.get("api/get_ids.php")
+            .success(function (response) {
+                if(response.success == true){
+                    $scope.articleId = response.articleId.id;
+                    $scope.malningId = response.malningId.id;
+                    $scope.brevId = response.brevId.id;
+                }else {
+                }
+            });
+    }
 
   $scope.getArticles = function (){
     $scope.isSelection = 0;

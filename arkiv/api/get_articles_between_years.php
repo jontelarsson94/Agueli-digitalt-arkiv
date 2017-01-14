@@ -53,6 +53,8 @@
       ]
   ]);
 
+  shuffle($articles_lastRead);
+
   $articles = array();
   //Get data from DB
   $articles_normal = $database->select("articles", [
@@ -67,6 +69,8 @@
       ]
   ]);
 
+  shuffle($articles_normal);
+
 
   $articles_starred = $database->select("articles", [
     "id",
@@ -79,6 +83,8 @@
       "id" => $year_article_ids
       ]
   ]);
+
+  shuffle($articles_starred);
 
   $main_images = array();
   $main_images_starred = array();
