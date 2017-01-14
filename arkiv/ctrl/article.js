@@ -45,6 +45,30 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
     });
   }
 
+  $scope.divideHeadline = function(headline) {
+      console.log(headline);
+      var res = headline.split(" ");
+      console.log(res);
+      $scope.headlines = [];
+      var current = "";
+      var length = 0;
+      for (i = 0; i < res.length; i++) {
+        length += res[i].length;
+        console.log(length);
+        if (length <= 24) {
+          current += " " + res[i];
+        } else {
+          console.log(current);
+          $scope.headlines.push(current);
+          current = res[i];
+          length = res[i].length;
+        }
+      }
+      $scope.headlines.push(current);
+      console.log($scope.headlines);
+
+  }
+
   $scope.getSlider = function (){
     $http.get("api/get_slider_years.php")
     .success(function (response) {
