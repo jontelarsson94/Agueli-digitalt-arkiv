@@ -17,6 +17,30 @@ angular.module('categories', []).controller('categoriesCtrl', function($scope, $
     });
   }
 
+  $scope.getTags = function (){
+      $http.get("api/get_tags.php")
+          .success(function (response) {
+              if(response.success == true){
+                  $scope.tags = response.result;
+              }else {
+                  $scope.tags_error = response.error;
+              }
+          });
+  }
+
+  $scope.removeTag = function (tagId){
+      $http({
+          url : "api/remove_tag.php?tag_id="+tagId,
+          method : "POST"
+      }).success(function (response) {
+          if(response.success == true){
+              $scope.getTags(); // för att visa nytt resultat efter borttagning av en tagg
+          }else {
+              $scope.tag_error = response.errors.exists;
+          }
+      });
+  }
+
   $scope.getTagsForCategory = function (id){
     $http.get("api/get_tags_for_category.php?category_id=" + id)
     .success(function (response) {

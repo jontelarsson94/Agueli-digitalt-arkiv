@@ -40,7 +40,7 @@
       <div class="col-md-12">
         <div class="col-md-10">
           <div ng-repeat="article in articles | limitTo:page">
-              <div class="col-lg-3 col-md-4 col-sm-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img ng-if="main_images[$index].url != NULL" src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><img ng-if="main_images[$index].url == NULL" src="img/white.jpg" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title.substring(0, 24)}}<span ng-if="article.title.length > 24">-</span></h4><h4 class="ag-overlay-text">{{article.title.substring(24, 48)}}</h4></div><span ng-if="article.starred == 1 && article.read == 0" class="pull-right glyphicon glyphicon-star ag-glyph-overlay"></span><span ng-if="article.read == 1" class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
+              <div class="col-lg-3 col-md-4 col-sm-6"><div ng-click="getArticle(article.id); lastRead(article.id);" data-target="#myModal" data-toggle="modal"><a href=""><img ng-if="main_images[$index].url != NULL" src="img/{{main_images[$index].url}}" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><img ng-if="main_images[$index].url == NULL" src="img/white.jpg" alt="..." class="img-responsive ag-img-thumbnail ag-big-div ag-card-image"><div class="transparent"><h4 class="ag-overlay-text">{{article.title.substring(0, 24)}}<span ng-if="article.title.length > 24">-</span></h4><h4 class="ag-overlay-text">{{article.title.substring(24, 48)}}</h4></div><span ng-if="article.read == 1" class="pull-right glyphicon glyphicon-eye-open ag-glyph-overlay"></span></img></a></div></div>
           </div>
         </div>
         <div class="col-md-2">
@@ -71,7 +71,7 @@
                     <div ng-repeat="body in bodies">
                       <p class="ag-black">{{body.body}}</p>
                       <div ng-repeat="image in body_images" ng-if="image.section == body.section && image.url != NULL">
-                        <img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail">
+                        <a target="_blank" href="img/{{image.url}}"><img src="img/{{image.url}}" alt="..." class="img-responsive center-block thumbnail"></a>
                       </div>
                     </div>
                     <div ng-if="bodies.length < body_images.length" ng-repeat="image in body_images">
