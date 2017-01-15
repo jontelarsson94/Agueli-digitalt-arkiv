@@ -61,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="navbar.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="navbar.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/navbar.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="455">
@@ -101,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db_credentials.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="db_credentials.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/inc/db_credentials.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
-              <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -135,13 +135,13 @@
         <option value="$PROJECT_DIR$/api/get_filtered_articles.php" />
         <option value="$PROJECT_DIR$/ctrl/article.js" />
         <option value="$PROJECT_DIR$/api/add_photo.php" />
-        <option value="$PROJECT_DIR$/inc/db_credentials.php" />
         <option value="$PROJECT_DIR$/articles.php" />
         <option value="$PROJECT_DIR$/delete_tags.php" />
         <option value="$PROJECT_DIR$/ctrl/categories.js" />
         <option value="$PROJECT_DIR$/api/remove_tag.php" />
         <option value="$PROJECT_DIR$/articles_admin.php" />
         <option value="$PROJECT_DIR$/inc/navbar.php" />
+        <option value="$PROJECT_DIR$/inc/db_credentials.php" />
       </list>
     </option>
   </component>
@@ -326,12 +326,12 @@
       <option name="presentableId" value="Default" />
       <updated>1484404168556</updated>
       <workItem from="1484404172296" duration="7515000" />
-      <workItem from="1484510773147" duration="1121000" />
+      <workItem from="1484510773147" duration="1223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8636000" />
+    <option name="totallyTimeSpent" value="8738000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="39" width="1428" height="757" extended-state="0" />
@@ -553,14 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inc/db_credentials.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/articles.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -629,6 +621,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
           <caret line="32" column="102" lean-forward="false" selection-start-line="32" selection-start-column="102" selection-end-line="32" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/db_credentials.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
           <folding />
         </state>
       </provider>
