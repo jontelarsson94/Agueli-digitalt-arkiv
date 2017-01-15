@@ -30,8 +30,9 @@
               <li <? if($nav_current_page=="add_article.php") echo 'class="active "' ?>><a href="add_article.php"><h3 class="ag-h3">Lägg till artikel</h3></a></li>
               <li <? if($nav_current_page=="categories.php") echo 'class="active "' ?>><a href="categories.php"><h3 class="ag-h3">Kategorier</h3></a></li>
               <li <? if($nav_current_page=="articles_admin.php") echo 'class="active "' ?>><a href="articles_admin.php"><h3 class="ag-h3">Artiklar (Admin)</h3></a></li>
-              <li <? if($nav_current_page=="articles_admin.php") echo 'class="active "' ?>><a href="api/log_out.php"><h3 class="ag-h3">Logga ut</h3></a></li>
-        <?php } ?>
+                <li <? if($nav_current_page=="articles_admin.php") echo 'class="active "' ?>><a href="delete_tags.php"><h3 class="ag-h3">Radera taggar</h3></a></li>
+                <li <? if($nav_current_page=="articles_admin.php") echo 'class="active "' ?>><a href="api/log_out.php"><h3 class="ag-h3">Logga ut</h3></a></li>
+                <?php } ?>
 
         <?php if($_SESSION['admin'] == true){ ?>
           <li <? if($nav_current_page=="add_article.php") echo 'class="active "' ?>><a href="add_user.php"><h3 class="ag-h3">Lägg till användare</h3></a></li>
