@@ -46,6 +46,8 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
+        } else{
+          $scope.showScrollButton = 1;
         }
         $scope.articles = response.result;
         $scope.main_images = response.main_images;
@@ -127,6 +129,8 @@ angular.module('article', ['rzModule']).controller('articleCtrl', function($scop
         $scope.maxArticles = response.result.length;
         if($scope.page >= $scope.maxArticles){
           $scope.showScrollButton = 0;
+        } else{
+          $scope.showScrollButton = 1;
         }
         $scope.articles = response.result;
         $scope.main_images = response.main_images;
