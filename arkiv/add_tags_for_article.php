@@ -13,7 +13,6 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/add_article.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="add_article" ng-controller="add_articleCtrl" ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
     <div class="container-fluid">
@@ -24,7 +23,7 @@
     </div>
     <div class="row col-md-12">
     <br>
-      <a href="articles.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Adding Tags</button></a>
+      <a href="index.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Adding Tags</button></a>
     </div>
     <div class="col-md-10 col-md-offset-1" ng-init="getTags()">
     <br><br>

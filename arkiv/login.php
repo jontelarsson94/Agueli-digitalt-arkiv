@@ -2,7 +2,7 @@
 require_once "inc/check_admin.php";
 
 if(checkAdmin() != "nothing"){
-  echo '<script type="text/javascript">window.location = "articles.php"</script>';
+  echo '<script type="text/javascript">window.location = "index.php"</script>';
 }
 ?>
 
@@ -18,7 +18,6 @@ if(checkAdmin() != "nothing"){
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/login.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body id="dynamicBody" ng-app="login" ng-controller="loginCtrl">
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid">

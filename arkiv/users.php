@@ -12,7 +12,6 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/admin.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body id="dynamicBody" ng-app="admin" ng-controller="adminCtrl">
     <?php require_once 'inc/navbar.php'; ?>
 <div class="container-fluid" ng-init="getUsers()">

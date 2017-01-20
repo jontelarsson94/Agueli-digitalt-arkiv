@@ -12,7 +12,6 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/add_article.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="add_article" ng-controller="add_articleCtrl" ng-init="article_id=<?if(empty($_REQUEST['article_id'])){echo -1;}else{echo $_REQUEST['article_id'];}?>" ng-cloak>
   <?php require_once 'inc/navbar.php'; ?>
 
@@ -144,7 +143,7 @@
     </div>
     <div class="row col-md-12">
     <br>
-      <a href="articles.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Updating Article</button></a>
+      <a href="index.php"><button class="btn btn-primary col-md-2 col-md-offset-5">Done Updating Article</button></a>
       <form id="deleteArticle" action="api/delete_article.php" method="post">
         <input type="hidden" value="<?php echo $_COOKIE['XSRF-TOKEN']; ?>" name="XSRF-TOKEN" id="XSRF-TOKEN">
         <input type="hidden" value="{{article_id}}" name="article_id" id="article_id">

@@ -43,7 +43,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         $_SESSION['admin'] = true;
       }
 
-      echo '<script type="text/javascript">window.location = "../articles.php"</script>';
+      echo '<script type="text/javascript">window.location = "../index.php"</script>';
     }
     else{
       echo '<script type="text/javascript">window.location = "../login.php?failed=true"</script>';

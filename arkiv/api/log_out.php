@@ -13,7 +13,7 @@ if (isset($_COOKIE['XSRF-TOKEN'])) {
 session_start();
 session_destroy();
 
-echo '<script type="text/javascript">window.location = "../articles.php"</script>';
+echo '<script type="text/javascript">window.location = "../index.php"</script>';
 }
 
 ?>

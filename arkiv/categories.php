@@ -13,7 +13,6 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/categories.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="categories" ng-controller="categoriesCtrl" ng-init="category_id=<?if(empty($_REQUEST['category_id'])){echo -1;}else{echo $_REQUEST['category_id'];}?>" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
     <div class="container-fluid">

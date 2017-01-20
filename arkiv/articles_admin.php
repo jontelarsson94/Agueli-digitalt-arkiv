@@ -15,7 +15,6 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="ctrl/article.js"></script>
   </head>
-  <div class="col-md-12 ag-white-bg"><img src="img/logo/agueli_logo.png"></div>
   <body ng-app="article" ng-controller="articleCtrl" ng-init="getArticles(); getPopularTags(); getClickedTags()" ng-cloak>
     <?php require_once 'inc/navbar.php'; ?>
     <div class="container-fluid">

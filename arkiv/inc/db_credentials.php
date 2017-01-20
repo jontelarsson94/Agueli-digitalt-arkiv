@@ -13,23 +13,23 @@ require_once '../lib/php/medoo.php';
 ]);*/
 
 //Localhost
-$database = new medoo([
+/*$database = new medoo([
     'database_type' => 'mysql',
     'database_name' => 'agueli_arkiv',
     'server' => 'localhost',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8'
-]);
+]);*/
 
 
 //Agueli
-/*$database = new medoo([
+$database = new medoo([
     'database_type' => 'mysql',
-    'database_name' => '105649-agueli',
-    'server' => '10.209.1.170',
-    'username' => '105649_lz33499',
-    'password' => 'phujebachi',
+    'database_name' => '105649-aaterh909341',
+    'server' => 'aaterh909341-105649.mysql.binero.se',
+    'username' => '105649_kv89994',
+    'password' => 'FB6VmfTD',
     'charset' => 'utf8'
-]);*/
+]);
 ?>
